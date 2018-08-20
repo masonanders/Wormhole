@@ -59,7 +59,7 @@ Upon 'Game Over' a scoreboard modal will slide down listing the player's previou
 
 ##### Day 1:
 - [ ] Briefly review games using canvas from the instructional curriculum.
-- [ ] Complete basic page skeleton and functionality.
+- [x] Complete basic page skeleton and functionality.
 - [ ] Complete board design and rendering.
 
 ##### Day 2:

@@ -4,11 +4,11 @@ module.exports = {
   context: __dirname,
   entry: './js/wormhole.js',
   output: {
-    path: "./",
+    path: path.resolve(__dirname),
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['.js']
   },
   devtool: 'source-map'
 };
