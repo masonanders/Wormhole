@@ -1,0 +1,20 @@
+{
+  "name": "wormhole",
+  "version": "1.0.0",
+  "description": "App for JavaScript project in the job-search portion of the App Academy bootcamp",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"This is a test\"",
+    "start": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masonanders/Wormhole.git"
+  },
+  "author": "mason anders",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masonanders/Wormhole/issues"
+  },
+  "homepage": "https://github.com/masonanders/Wormhole#readme"
+}
