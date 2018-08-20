@@ -1,3 +1,42 @@
+body {
+  background-color: black;
+}
+
 h1 {
-  font-size: 50px;
+  color: #21ecff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 40px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+a {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.developer-links {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  top: -55px;
+}
+
+.canvas-div {
+  display: flex;
+  justify-content: center;
+}
+
+.linkedin-link {
+  background-image: url('../docs/images/linked-in.png');
+  background-size: cover;
+  height: 25px;
+  width: 25px;
+}
+
+.github-link {
+  background-image: url('../docs/images/github.png');
+  background-size: cover;
+  height: 25px;
+  width: 25px;
 }
