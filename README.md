@@ -5,3 +5,5 @@ Navigate your way through a wormhole at speeds near that of light while you avoi
 ![Wormhole wireframe](https://i.imgur.com/5kUSitN.png)
 
 The player can navigate clockwise or counter-clockwise around the circumference of the circle while dodging oncoming obstacles which increase in number and speed over time.
+
+[Proposal](./docs/proposal.md)
