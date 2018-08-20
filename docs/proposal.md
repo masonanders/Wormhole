@@ -8,11 +8,11 @@ This game is inspired by classic arcade games, particularly   [Tempest](https://
 
 ### Functionality
 
-- [ ] Users can press left/right arrow keys to move clockwise/counter-clockwise around the circumference of a circle.
-- [ ] Obstacles will be generated at the center of the circle and make their ways to the edge of it at high speeds.
-- [ ] The game ends if a player collides with an obstacle.
-- [ ] Players can choose to move sliders determining the initial speed and/or spawn rate of the obstacles.
-- [ ] The time of each run is recorded and saved to a database. A top 10 list appears at the end of each game.
+* Users can press left/right arrow keys to move clockwise/counter-clockwise around the circumference of a circle.
+* Obstacles will be generated at the center of the circle and make their ways to the edge of it at high speeds.
+* The game ends if a player collides with an obstacle.
+* Players can choose to move sliders determining the initial speed and/or spawn rate of the obstacles.
+* The time of each run is recorded and saved to a database. A top 10 list appears at the end of each game.
 
 ### Wireframes
 
