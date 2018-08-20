@@ -4,7 +4,7 @@ Wormhole is a simple and easy game to pick up quickly. The extent of the gamepla
 
 The speed will quickly pick up soon after the game starts with some flashy visuals to draw the player in. I've recognized that simple games with minimal controls, a high level of difficulty, and repetitive gameplay are commonly the easiest to for people to pick up and find hard to put down.
 
-This game is inspired by classic arcade games, particularly [Tempest](https://en.wikipedia.org/wiki/Tempest_(video_game). I am envisioning a retro design, neon colors, and simple gameplay to reflect the first video games of the early 1980s.
+This game is inspired by classic arcade games, particularly   [Tempest](https://en.wikipedia.org/wiki/Tempest_(video_game). I am envisioning a retro design, neon colors, and simple gameplay to reflect the first video games of the early 1980s.
 
 ### Functionality
 
@@ -15,6 +15,8 @@ This game is inspired by classic arcade games, particularly [Tempest](https://en
 - [ ] The time of each run is recorded and saved to a database. A top 10 list appears at the end of each game.
 
 ### Wireframes
+
+![Wireframe](./screenshots/wireframe.png)
 
 The app will consist of a single page with a play button, a scoreboard button, links to the Github repository and developer LinkedIn.
 
