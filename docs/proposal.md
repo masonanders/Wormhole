@@ -35,8 +35,8 @@ Upon 'Game Over' a scoreboard modal will slide down listing the player's previou
 * React.js for basic page structure and functionality.
 
 ##### Main files
-* `app.jsx` main structure of the page.
-* `board.js` will be the center of the game logic.
+* `wormhole.js` main structure of the canvas and center of game logic.
+* `board.js` responsible for rendering the board.
 * `player.js` receives input and outputs reaction and position.
 * `obstacle.js` handles individual obstacles throughout their life-span.
 * `scorebaord.jsx` fetches scores and displays them in a `<ul></ul>`.
@@ -58,7 +58,7 @@ Upon 'Game Over' a scoreboard modal will slide down listing the player's previou
 - [x] Finish basic project skeleton and essentials.
 
 ##### Day 1:
-- [ ] Briefly review games using canvas from the instructional curriculum.
+- [x] Briefly review games using canvas from the instructional curriculum.
 - [x] Complete basic page skeleton and functionality.
 - [ ] Complete board design and rendering.
 
