@@ -42,7 +42,6 @@ Upon 'Game Over' a scoreboard modal will slide down listing the player's previou
 * `scorebaord.jsx` fetches scores and displays them in a `<ul></ul>`.
 
 ### MVPs
-
 - [ ] Basic visuals and an interactive interface.
 - [ ] Player can move avatar around the circle.
 - [ ] Obstacles generate and move outward toward the edge of the circle.
