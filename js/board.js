@@ -6,8 +6,8 @@ class Board {
   rings() {
     const ctx = this.ctx;
 
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(300, 300);
     ctx.arc(300, 300, 290, 0, Math.PI * 2, false);
     ctx.fillStyle = 'rgba(255, 40, 230, 1)';
     ctx.fill();
@@ -17,30 +17,6 @@ class Board {
     ctx.arc(300, 300, 275, 0, Math.PI * 2, false);
     ctx.fillStyle = '#000000';
     ctx.fill();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.9)';
-    ctx.arc(300, 300, 150, 0, Math.PI * 2, false);
-    ctx.stroke();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.5)';
-    ctx.arc(300, 300, 85, 0, Math.PI * 2, false);
-    ctx.stroke();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.3)';
-    ctx.arc(300, 300, 50, 0, Math.PI * 2, false);
-    ctx.stroke();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.1)';
-    ctx.arc(300, 300, 35, 0, Math.PI * 2, false);
-    ctx.stroke();
     ctx.closePath();
 
     ctx.beginPath();
@@ -89,7 +65,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.9)';
+    ctx.strokeStyle = 'rgba(255, 40, 230, 0.75)';
     ctx.moveTo(300, 150);
     ctx.lineTo(300, 215);
     ctx.moveTo(300, 450);
@@ -154,15 +130,15 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.9)';
+    ctx.strokeStyle = 'rgba(255, 40, 230, 0.75)';
     ctx.moveTo(194, 194);
-    ctx.lineTo(239, 239);
+    ctx.lineTo(240, 240);
     ctx.moveTo(406, 194);
-    ctx.lineTo(361, 239);
-    ctx.moveTo(194, 406);
-    ctx.lineTo(239, 361);
+    ctx.lineTo(360, 240);
+    ctx.moveTo(195, 405);
+    ctx.lineTo(240, 360);
     ctx.moveTo(406, 406);
-    ctx.lineTo(361, 361);
+    ctx.lineTo(360, 360);
     ctx.stroke();
     ctx.closePath();
 
@@ -180,7 +156,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.3)';
+    ctx.strokeStyle = 'rgba(255, 40, 230, 0.25)';
     ctx.moveTo(265, 265);
     ctx.lineTo(275, 275);
     ctx.moveTo(325, 325);
