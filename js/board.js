@@ -3,6 +3,13 @@ class Board {
     this.ctx = ctx;
   }
 
+  background() {
+    const ctx = this.ctx;
+
+    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.fillRect(0, 0, 600, 600);
+  }
+
   rings() {
     const ctx = this.ctx;
 
@@ -52,6 +59,7 @@ class Board {
     const ctx = this.ctx;
 
     ctx.beginPath();
+    ctx.fillStyle = 'rgba(255, 40, 230, 1.0)';
     ctx.strokeStyle = 'rgba(255, 40, 230, 1.0)';
     ctx.moveTo(300, 25);
     ctx.lineTo(300, 150);
@@ -183,6 +191,7 @@ class Board {
   }
 
   render() {
+    this.background();
     this.rings();
     this.eye();
     this.lines();

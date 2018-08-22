@@ -1,6 +1,7 @@
 import Board from './board';
-import Circle from './circle';
 import Player from './player';
+import Obstacle from './obstacle';
+import Util from './util';
 
 document.addEventListener('DOMContentLoaded', () => {
   // TODO Remove console.log() after development
@@ -9,14 +10,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('wormhole');
   const ctx = canvas.getContext('2d');
 
+  let _patterns = [
+    [0,1,2,3,4,5,6,7],
+    [4,1,2,0,3,7,5,6],
+    [7,6,5,4,3,2,1,0],
+    [4,3,5,0,6,1,7,2],
+    [2,4,1,6,4,3,7,0],
+    [5,2,7,1,0,4,3,6],
+    [1,7,3,2,5,6,0,4],
+    [3,5,6,7,0,1,2,4]
+  ];
+
+  const paths = {
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false
+  };
+
   const board = new Board(ctx);
   const player = new Player(ctx);
+  const obstacles = [];
   const circles = [];
 
+  let curShipPath = 0;
+
+  let curPattern = _patterns[Util.randomNumber(8)];
+  let curPath = 0;
+
   setInterval(() => {
-    const circle = new Circle(ctx);
-    circles.push(circle);
-    circles.length > 5 ? circles.shift() : null;
+    const obstacle = new Obstacle(ctx, curPattern[curPath]);
+    curPath += 1;
+    if (curPath >= curPattern.length) {
+      curPattern = _patterns[Util.randomNumber(8)];
+      curPath = 0;
+    }
+    obstacles.push(obstacle);
+    obstacles.length > 20 ? obstacles.shift() : null;
   }, 400);
 
   document.addEventListener('keydown', (e) => {
@@ -27,12 +61,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+
   const renderGame = () => {
     board.render();
-    // circles.forEach(circle => {
-    //   circle.render();
-    // });
+    const deathPaths = [];
+    obstacles.forEach(obst => {
+      obst.render();
+
+      if (obst.begin > 200 && obst.end < 280) {
+        paths[obst.path] = true;
+        deathPaths.push(obst.path);
+      } else if (!deathPaths.includes(obst.path)) {
+        paths[obst.path] = false;
+      }
+    });
+    for (let i = 0; i < 8; i++) {
+      if (!deathPaths.includes(i)) {
+        paths[i] = false;
+      }
+    }
     player.render();
+    if (paths[player.pos]) {
+      console.log('Game Over!');
+    }
     window.requestAnimationFrame(renderGame);
   };
   window.requestAnimationFrame(renderGame);

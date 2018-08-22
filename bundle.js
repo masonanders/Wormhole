@@ -98,6 +98,13 @@ class Board {
     this.ctx = ctx;
   }
 
+  background() {
+    const ctx = this.ctx;
+
+    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.fillRect(0, 0, 600, 600);
+  }
+
   rings() {
     const ctx = this.ctx;
 
@@ -147,6 +154,7 @@ class Board {
     const ctx = this.ctx;
 
     ctx.beginPath();
+    ctx.fillStyle = 'rgba(255, 40, 230, 1.0)';
     ctx.strokeStyle = 'rgba(255, 40, 230, 1.0)';
     ctx.moveTo(300, 25);
     ctx.lineTo(300, 150);
@@ -278,6 +286,7 @@ class Board {
   }
 
   render() {
+    this.background();
     this.rings();
     this.eye();
     this.lines();
@@ -289,44 +298,69 @@ module.exports = Board;
 
 /***/ }),
 
-/***/ "./js/circle.js":
-/*!**********************!*\
-  !*** ./js/circle.js ***!
-  \**********************/
+/***/ "./js/obstacle.js":
+/*!************************!*\
+  !*** ./js/obstacle.js ***!
+  \************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-class Circle {
-  constructor(ctx) {
+class Obstacle {
+  constructor(ctx, path) {
     this.ctx = ctx;
     this.radius = 1;
-  }
+    this.speed = 1.09;
+    this.path = path;
+    this.begin = 0;
+    this.end = 0;
 
-  calculateRadius() {
-    if (this.radius * 1.075 < 300) {
-      this.radius *= 1.075;
-    }
-  }
-
-  drawCircle() {
-    const ctx = this.ctx;
-    const opacity = this.radius / 300;
-
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(255, 40, 230, ${opacity})`;
-    ctx.lineWidth = 7;
-    ctx.arc(300, 300, this.radius, 0, Math.PI * 2, false);
-    ctx.stroke();
-    ctx.closePath();
+    this.sections = [
+      0,
+      Math.PI / 4,
+      Math.PI / 2,
+      3 * Math.PI / 4,
+      Math.PI,
+      5 * Math.PI / 4,
+      3 * Math.PI / 2,
+      7 * Math.PI / 4
+    ];
   }
 
   render() {
-    this.calculateRadius();
-    this.drawCircle();
+    const ctx = this.ctx;
+    const sections = this.sections;
+    const path = this.path;
+
+    this.radius *= this.speed;
+    this.length = (this.radius / 10) * 3.5;
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgb(0, 255, 0)';
+    ctx.fillStyle = 'rgb(0, 255, 0)';
+    ctx.arc(
+      300,
+      300,
+      this.radius,
+      5.5 + this.sections[path],
+      Math.PI * 2 + this.sections[path],
+      false
+    );
+    ctx.arc(
+      300,
+      300,
+      this.radius - this.length,
+      Math.PI * 2 + this.sections[path],
+      5.5 + this.sections[path],
+      true
+    );
+    ctx.fill();
+
+    this.begin = this.radius;
+    this.end = this.radius - this.length;
   }
 }
 
-module.exports = Circle;
+module.exports = Obstacle;
 
 
 /***/ }),
@@ -341,15 +375,15 @@ module.exports = Circle;
 class Player {
   constructor(ctx) {
     this.ctx = ctx;
-    this.pos = 1;
+    this.pos = 2;
   }
 
   moveLeft() {
-    this.pos = (this.pos + 1 === 9 ? 1 : this.pos + 1);
+    this.pos = (this.pos + 1 > 7 ? 0 : this.pos + 1);
   }
 
   moveRight() {
-    this.pos = (this.pos - 1 === 0 ? 8 : this.pos - 1);
+    this.pos = (this.pos - 1 < 0 ? 7 : this.pos - 1);
   }
 
   drawShip() {
@@ -360,159 +394,15 @@ class Player {
     ctx.lineWidth = 3;
 
     switch (this.pos) {
-      case 1:
-        ctx.moveTo(376, 570);
-        ctx.lineTo(370, 550);
-        ctx.lineTo(380, 520);
-        ctx.lineTo(383, 486);
-        ctx.lineTo(408, 505);
-        ctx.lineTo(440, 520);
-        ctx.lineTo(453, 538);
-        ctx.moveTo(383, 486);
-        ctx.lineTo(398, 520);
-        ctx.lineTo(408, 524);
-        ctx.lineTo(415, 535);
-        ctx.lineTo(407, 542);
-        ctx.lineTo(396, 544);
-        ctx.lineTo(393, 530);
-        ctx.lineTo(398, 520);
-        ctx.moveTo(376, 570);
-        ctx.lineTo(396, 544);
-        ctx.moveTo(415, 535);
-        ctx.lineTo(453, 535);
-        ctx.moveTo(454, 536);
-        ctx.lineTo(411, 550);
-        ctx.lineTo(376, 570);
-        break;
-      case 2:
-        ctx.moveTo(157, 545);
-        ctx.lineTo(168, 525);
-        ctx.lineTo(200, 505);
-        ctx.lineTo(225, 485);
-        ctx.lineTo(230, 515);
-        ctx.lineTo(240, 555);
-        ctx.lineTo(235, 575);
-        ctx.moveTo(225, 485);
-        ctx.lineTo(212, 520);
-        ctx.lineTo(215, 530);
-        ctx.lineTo(213, 540);
-        ctx.lineTo(203, 542);
-        ctx.lineTo(197, 535);
-        ctx.lineTo(202, 525);
-        ctx.lineTo(212, 520);
-        ctx.moveTo(213, 540);
-        ctx.lineTo(235, 575);
-        ctx.moveTo(197, 535);
-        ctx.lineTo(157, 543);
-        ctx.moveTo(157, 545);
-        ctx.lineTo(200, 555);
-        ctx.lineTo(235, 575);
-        break;
-      case 3:
-        ctx.moveTo(25, 367);
-        ctx.lineTo(50, 360);
-        ctx.lineTo(85, 368);
-        ctx.lineTo(120, 370);
-        ctx.lineTo(100, 395);
-        ctx.lineTo(80, 430);
-        ctx.lineTo(56, 446);
-        ctx.moveTo(120, 370);
-        ctx.lineTo(80, 387);
-        ctx.lineTo(76, 397);
-        ctx.lineTo(66, 402);
-        ctx.lineTo(60, 397);
-        ctx.lineTo(60, 388);
-        ctx.lineTo(70, 385);
-        ctx.lineTo(80, 387);
-        ctx.moveTo(66, 402);
-        ctx.lineTo(60, 443);
-        ctx.moveTo(60, 388);
-        ctx.lineTo(27, 367);
-        ctx.moveTo(25, 367);
-        ctx.lineTo(47, 405);
-        ctx.lineTo(58, 445);
-        break;
-      case 4:
-        ctx.moveTo(61, 150);
-        ctx.lineTo(80, 163);
-        ctx.lineTo(100, 197);
-        ctx.lineTo(120, 218);
-        ctx.lineTo(95, 221);
-        ctx.lineTo(50, 233);
-        ctx.lineTo(25, 225);
-        ctx.moveTo(120, 218);
-        ctx.lineTo(80, 203);
-        ctx.lineTo(72, 208);
-        ctx.lineTo(60, 205);
-        ctx.lineTo(59, 197);
-        ctx.lineTo(65, 190);
-        ctx.lineTo(77, 195);
-        ctx.lineTo(80, 205);
-        ctx.moveTo(60, 205);
-        ctx.lineTo(31, 226);
-        ctx.moveTo(65, 190);
-        ctx.lineTo(63, 150);
-        ctx.moveTo(29, 225);
-        ctx.lineTo(50, 190);
-        ctx.lineTo(61, 150);
-        break;
-      case 5:
-        ctx.moveTo(227, 28);
-        ctx.lineTo(234, 45);
-        ctx.lineTo(225, 85);
-        ctx.lineTo(225, 118);
-        ctx.lineTo(198, 98);
-        ctx.lineTo(160, 80);
-        ctx.lineTo(150, 60);
-        ctx.moveTo(225, 118);
-        ctx.lineTo(205, 78);
-        ctx.lineTo(195, 76);
-        ctx.lineTo(189, 65);
-        ctx.lineTo(195, 60);
-        ctx.lineTo(203, 59);
-        ctx.lineTo(207, 70);
-        ctx.lineTo(205, 78);
-        ctx.moveTo(189, 65);
-        ctx.lineTo(150, 63);
-        ctx.moveTo(203, 59);
-        ctx.lineTo(227, 30);
-        ctx.moveTo(150, 60);
-        ctx.lineTo(190, 48);
-        ctx.lineTo(227, 28);
-        break;
-      case 6:
-        ctx.moveTo(443, 57);
-        ctx.lineTo(433, 75);
-        ctx.lineTo(398, 93);
-        ctx.lineTo(370, 118);
-        ctx.lineTo(370, 85);
-        ctx.lineTo(360, 44);
-        ctx.lineTo(365, 24);
-        ctx.moveTo(370, 118);
-        ctx.lineTo(390, 72);
-        ctx.lineTo(386, 64);
-        ctx.lineTo(391, 54);
-        ctx.lineTo(398, 54);
-        ctx.lineTo(402, 59);
-        ctx.lineTo(398, 70);
-        ctx.lineTo(390, 72);
-        ctx.moveTo(391, 54);
-        ctx.lineTo(365, 27);
-        ctx.moveTo(402, 59);
-        ctx.lineTo(443, 60);
-        ctx.moveTo(443, 57);
-        ctx.lineTo(400, 45);
-        ctx.lineTo(365, 24);
-        break;
-      case 7:
+      case 0:
         ctx.moveTo(572, 228);
         ctx.lineTo(548, 233);
-        ctx.lineTo(500, 226);
-        ctx.lineTo(470, 225);
-        ctx.lineTo(490, 203);
+        ctx.lineTo(507, 223);
+        ctx.lineTo(483, 220);
+        ctx.lineTo(498, 200);
         ctx.lineTo(520, 160);
         ctx.lineTo(540, 150);
-        ctx.moveTo(470, 225);
+        ctx.moveTo(483, 220);
         ctx.lineTo(518, 205);
         ctx.lineTo(520, 197);
         ctx.lineTo(533, 191);
@@ -528,15 +418,15 @@ class Player {
         ctx.lineTo(550, 193);
         ctx.lineTo(540, 150);
         break;
-      case 8:
+      case 1:
         ctx.moveTo(542, 445);
         ctx.lineTo(522, 432);
         ctx.lineTo(505, 400);
-        ctx.lineTo(483, 372);
+        ctx.lineTo(487, 374);
         ctx.lineTo(522, 368);
         ctx.lineTo(553, 360);
         ctx.lineTo(575, 366);
-        ctx.moveTo(483, 372);
+        ctx.moveTo(487, 374);
         ctx.lineTo(524, 388);
         ctx.lineTo(530, 384);
         ctx.lineTo(543, 388);
@@ -552,6 +442,150 @@ class Player {
         ctx.lineTo(550, 400);
         ctx.lineTo(542, 445);
         break;
+      case 2:
+        ctx.moveTo(376, 570);
+        ctx.lineTo(370, 550);
+        ctx.lineTo(380, 520);
+        ctx.lineTo(383, 486);
+        ctx.lineTo(408, 505);
+        ctx.lineTo(440, 520);
+        ctx.lineTo(453, 538);
+        ctx.moveTo(383, 486);
+        ctx.lineTo(398, 520);
+        ctx.lineTo(406, 522);
+        ctx.lineTo(411, 533);
+        ctx.lineTo(408, 540);
+        ctx.lineTo(400, 540);
+        ctx.lineTo(395, 528);
+        ctx.lineTo(398, 520);
+        ctx.moveTo(376, 570);
+        ctx.lineTo(400, 540);
+        ctx.moveTo(411, 533);
+        ctx.lineTo(453, 535);
+        ctx.moveTo(454, 536);
+        ctx.lineTo(411, 550);
+        ctx.lineTo(376, 570);
+        break;
+      case 3:
+        ctx.moveTo(157, 545);
+        ctx.lineTo(168, 525);
+        ctx.lineTo(200, 505);
+        ctx.lineTo(224, 487);
+        ctx.lineTo(230, 515);
+        ctx.lineTo(240, 555);
+        ctx.lineTo(235, 575);
+        ctx.moveTo(224, 487);
+        ctx.lineTo(212, 520);
+        ctx.lineTo(215, 530);
+        ctx.lineTo(213, 540);
+        ctx.lineTo(203, 542);
+        ctx.lineTo(197, 535);
+        ctx.lineTo(202, 525);
+        ctx.lineTo(212, 520);
+        ctx.moveTo(213, 540);
+        ctx.lineTo(235, 575);
+        ctx.moveTo(197, 535);
+        ctx.lineTo(157, 543);
+        ctx.moveTo(157, 545);
+        ctx.lineTo(200, 555);
+        ctx.lineTo(235, 575);
+        break;
+      case 4:
+        ctx.moveTo(25, 367);
+        ctx.lineTo(50, 360);
+        ctx.lineTo(85, 368);
+        ctx.lineTo(115, 373);
+        ctx.lineTo(100, 395);
+        ctx.lineTo(80, 430);
+        ctx.lineTo(56, 446);
+        ctx.moveTo(115, 373);
+        ctx.lineTo(80, 387);
+        ctx.lineTo(76, 397);
+        ctx.lineTo(66, 402);
+        ctx.lineTo(60, 397);
+        ctx.lineTo(60, 388);
+        ctx.lineTo(70, 385);
+        ctx.lineTo(80, 387);
+        ctx.moveTo(66, 402);
+        ctx.lineTo(60, 443);
+        ctx.moveTo(60, 388);
+        ctx.lineTo(27, 367);
+        ctx.moveTo(25, 367);
+        ctx.lineTo(47, 405);
+        ctx.lineTo(58, 445);
+        break;
+      case 5:
+        ctx.moveTo(61, 150);
+        ctx.lineTo(80, 163);
+        ctx.lineTo(100, 197);
+        ctx.lineTo(116, 216);
+        ctx.lineTo(95, 221);
+        ctx.lineTo(50, 233);
+        ctx.lineTo(25, 225);
+        ctx.moveTo(116, 216);
+        ctx.lineTo(80, 203);
+        ctx.lineTo(72, 208);
+        ctx.lineTo(60, 205);
+        ctx.lineTo(59, 197);
+        ctx.lineTo(65, 190);
+        ctx.lineTo(77, 195);
+        ctx.lineTo(80, 205);
+        ctx.moveTo(60, 205);
+        ctx.lineTo(31, 226);
+        ctx.moveTo(65, 190);
+        ctx.lineTo(63, 150);
+        ctx.moveTo(29, 225);
+        ctx.lineTo(50, 190);
+        ctx.lineTo(61, 150);
+        break;
+      case 6:
+        ctx.moveTo(227, 28);
+        ctx.lineTo(234, 45);
+        ctx.lineTo(225, 85);
+        ctx.lineTo(223, 115);
+        ctx.lineTo(198, 98);
+        ctx.lineTo(160, 80);
+        ctx.lineTo(150, 60);
+        ctx.moveTo(223, 115);
+        ctx.lineTo(205, 78);
+        ctx.lineTo(195, 76);
+        ctx.lineTo(189, 65);
+        ctx.lineTo(195, 60);
+        ctx.lineTo(203, 59);
+        ctx.lineTo(207, 70);
+        ctx.lineTo(205, 78);
+        ctx.moveTo(189, 65);
+        ctx.lineTo(150, 63);
+        ctx.moveTo(203, 59);
+        ctx.lineTo(227, 30);
+        ctx.moveTo(150, 60);
+        ctx.lineTo(190, 48);
+        ctx.lineTo(227, 28);
+        break;
+      case 7:
+        ctx.moveTo(443, 57);
+        ctx.lineTo(433, 75);
+        ctx.lineTo(398, 93);
+        ctx.lineTo(370, 113);
+        ctx.lineTo(370, 85);
+        ctx.lineTo(360, 44);
+        ctx.lineTo(365, 24);
+        ctx.moveTo(370, 113);
+        ctx.lineTo(390, 72);
+        ctx.lineTo(386, 64);
+        ctx.lineTo(391, 54);
+        ctx.lineTo(398, 54);
+        ctx.lineTo(402, 59);
+        ctx.lineTo(398, 70);
+        ctx.lineTo(390, 72);
+        ctx.moveTo(391, 54);
+        ctx.lineTo(365, 27);
+        ctx.moveTo(402, 59);
+        ctx.lineTo(443, 60);
+        ctx.moveTo(443, 57);
+        ctx.lineTo(400, 45);
+        ctx.lineTo(365, 24);
+        break;
       default:
         null;
     }
@@ -562,12 +596,31 @@ class Player {
     const ctx = this.ctx;
 
     this.drawShip();
-
-
   }
 }
 
 module.exports = Player;
+
+
+/***/ }),
+
+/***/ "./js/util.js":
+/*!********************!*\
+  !*** ./js/util.js ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+const Util = {
+};
+
+Util.randomNumber = (max) => {
+  let n;
+  n = Math.floor(Math.random() * (max));
+  return n;
+};
+
+module.exports = Util;
 
 
 /***/ }),
@@ -583,10 +636,13 @@ module.exports = Player;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board */ "./js/board.js");
 /* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_board__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _circle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./circle */ "./js/circle.js");
-/* harmony import */ var _circle__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_circle__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./player */ "./js/player.js");
-/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_player__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./player */ "./js/player.js");
+/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_player__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _obstacle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./obstacle */ "./js/obstacle.js");
+/* harmony import */ var _obstacle__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_obstacle__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./util */ "./js/util.js");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_util__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -598,14 +654,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('wormhole');
   const ctx = canvas.getContext('2d');
 
+  let _patterns = [
+    [0,1,2,3,4,5,6,7],
+    [4,1,2,0,3,7,5,6],
+    [7,6,5,4,3,2,1,0],
+    [4,3,5,0,6,1,7,2],
+    [2,4,1,6,4,3,7,0],
+    [5,2,7,1,0,4,3,6],
+    [1,7,3,2,5,6,0,4],
+    [3,5,6,7,0,1,2,4]
+  ];
+
+  const paths = {
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+    7: false
+  };
+
   const board = new _board__WEBPACK_IMPORTED_MODULE_0___default.a(ctx);
-  const player = new _player__WEBPACK_IMPORTED_MODULE_2___default.a(ctx);
+  const player = new _player__WEBPACK_IMPORTED_MODULE_1___default.a(ctx);
+  const obstacles = [];
   const circles = [];
 
+  let curShipPath = 0;
+
+  let curPattern = _patterns[_util__WEBPACK_IMPORTED_MODULE_3___default.a.randomNumber(8)];
+  let curPath = 0;
+
   setInterval(() => {
-    const circle = new _circle__WEBPACK_IMPORTED_MODULE_1___default.a(ctx);
-    circles.push(circle);
-    circles.length > 5 ? circles.shift() : null;
+    const obstacle = new _obstacle__WEBPACK_IMPORTED_MODULE_2___default.a(ctx, curPattern[curPath]);
+    curPath += 1;
+    if (curPath >= curPattern.length) {
+      curPattern = _patterns[_util__WEBPACK_IMPORTED_MODULE_3___default.a.randomNumber(8)];
+      curPath = 0;
+    }
+    obstacles.push(obstacle);
+    obstacles.length > 20 ? obstacles.shift() : null;
   }, 400);
 
   document.addEventListener('keydown', (e) => {
@@ -616,12 +705,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+
   const renderGame = () => {
     board.render();
-    // circles.forEach(circle => {
-    //   circle.render();
-    // });
+    const deathPaths = [];
+    obstacles.forEach(obst => {
+      obst.render();
+
+      if (obst.begin > 200 && obst.end < 280) {
+        paths[obst.path] = true;
+        deathPaths.push(obst.path);
+      } else if (!deathPaths.includes(obst.path)) {
+        paths[obst.path] = false;
+      }
+    });
+    for (let i = 0; i < 8; i++) {
+      if (!deathPaths.includes(i)) {
+        paths[i] = false;
+      }
+    }
     player.render();
+    if (paths[player.pos]) {
+      console.log('Game Over!');
+    }
     window.requestAnimationFrame(renderGame);
   };
   window.requestAnimationFrame(renderGame);
