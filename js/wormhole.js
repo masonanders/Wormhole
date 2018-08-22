@@ -10,17 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('wormhole');
   const ctx = canvas.getContext('2d');
 
-  let _patterns = [
-    [0,1,2,3,4,5,6,7],
-    [4,1,2,0,3,7,5,6],
-    [7,6,5,4,3,2,1,0],
-    [4,3,5,0,6,1,7,2],
-    [2,4,1,6,4,3,7,0],
-    [5,2,7,1,0,4,3,6],
-    [1,7,3,2,5,6,0,4],
-    [3,5,6,7,0,1,2,4]
-  ];
-
   const paths = {
     0: false,
     1: false,
@@ -36,22 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const player = new Player(ctx);
   const obstacles = [];
   const circles = [];
+  const util = new Util();
 
   let curShipPath = 0;
 
-  let curPattern = _patterns[Util.randomNumber(8)];
+  let curPattern = util.patterns[util.randomNumber(8)];
   let curPath = 0;
 
   setInterval(() => {
     const obstacle = new Obstacle(ctx, curPattern[curPath]);
     curPath += 1;
     if (curPath >= curPattern.length) {
-      curPattern = _patterns[Util.randomNumber(8)];
+      curPattern = util.patterns[util.randomNumber(8)];
       curPath = 0;
     }
     obstacles.push(obstacle);
     obstacles.length > 20 ? obstacles.shift() : null;
-  }, 400);
+  }, 200);
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft'){
@@ -75,16 +65,23 @@ document.addEventListener('DOMContentLoaded', () => {
         paths[obst.path] = false;
       }
     });
+
     for (let i = 0; i < 8; i++) {
       if (!deathPaths.includes(i)) {
         paths[i] = false;
       }
     }
+
     player.render();
+
     if (paths[player.pos]) {
-      console.log('Game Over!');
+      player.damage();
     }
-    window.requestAnimationFrame(renderGame);
+    if (player.shields <= 0) {
+      console.log('Game Over!');
+    } else {
+      window.requestAnimationFrame(renderGame);
+    }
   };
   window.requestAnimationFrame(renderGame);
 });

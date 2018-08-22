@@ -2,6 +2,7 @@ class Player {
   constructor(ctx) {
     this.ctx = ctx;
     this.pos = 2;
+    this.shields = 25;
   }
 
   moveLeft() {
@@ -218,10 +219,28 @@ class Player {
     ctx.stroke();
   }
 
+  shieldBar() {
+    const ctx = this.ctx;
+
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.strokeRect(5, 5, 104, 20);
+    ctx.fillStyle = `rgb(0, 150, 255)`;
+    ctx.fillRect(7, 7, this.shields * 4, 16);
+    ctx.font = '15px Arial';
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#000000';
+    ctx.fillText('SHIELDS', 25, 21);
+  }
+
+  damage() {
+    this.shields > 0 ? this.shields -= 1 : null;
+  }
+
   render() {
     const ctx = this.ctx;
 
     this.drawShip();
+    this.shieldBar();
   }
 }
 

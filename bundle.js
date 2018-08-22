@@ -376,6 +376,7 @@ class Player {
   constructor(ctx) {
     this.ctx = ctx;
     this.pos = 2;
+    this.shields = 25;
   }
 
   moveLeft() {
@@ -592,10 +593,28 @@ class Player {
     ctx.stroke();
   }
 
+  shieldBar() {
+    const ctx = this.ctx;
+
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.strokeRect(5, 5, 104, 20);
+    ctx.fillStyle = `rgb(0, 150, 255)`;
+    ctx.fillRect(7, 7, this.shields * 4, 16);
+    ctx.font = '15px Arial';
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#000000';
+    ctx.fillText('SHIELDS', 25, 21);
+  }
+
+  damage() {
+    this.shields > 0 ? this.shields -= 1 : null;
+  }
+
   render() {
     const ctx = this.ctx;
 
     this.drawShip();
+    this.shieldBar();
   }
 }
 
@@ -611,14 +630,26 @@ module.exports = Player;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-const Util = {
-};
+class Util {
+  constructor() {
+    this.patterns = [
+      [0,1,2,3,4,5,6,7],
+      [4,1,2,0,3,7,5,6],
+      [7,6,5,4,3,2,1,0],
+      [4,3,5,0,6,1,7,2],
+      [2,4,1,6,4,3,7,0],
+      [5,2,7,1,0,4,3,6],
+      [1,7,3,2,5,6,0,4],
+      [3,5,6,7,0,1,2,4]
+    ];
+  }
 
-Util.randomNumber = (max) => {
-  let n;
-  n = Math.floor(Math.random() * (max));
-  return n;
-};
+  randomNumber(max) {
+    let n;
+    n = Math.floor(Math.random() * (max));
+    return n;
+  }
+}
 
 module.exports = Util;
 
@@ -654,17 +685,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('wormhole');
   const ctx = canvas.getContext('2d');
 
-  let _patterns = [
-    [0,1,2,3,4,5,6,7],
-    [4,1,2,0,3,7,5,6],
-    [7,6,5,4,3,2,1,0],
-    [4,3,5,0,6,1,7,2],
-    [2,4,1,6,4,3,7,0],
-    [5,2,7,1,0,4,3,6],
-    [1,7,3,2,5,6,0,4],
-    [3,5,6,7,0,1,2,4]
-  ];
-
   const paths = {
     0: false,
     1: false,
@@ -680,22 +700,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const player = new _player__WEBPACK_IMPORTED_MODULE_1___default.a(ctx);
   const obstacles = [];
   const circles = [];
+  const util = new _util__WEBPACK_IMPORTED_MODULE_3___default.a();
 
   let curShipPath = 0;
 
-  let curPattern = _patterns[_util__WEBPACK_IMPORTED_MODULE_3___default.a.randomNumber(8)];
+  let curPattern = util.patterns[util.randomNumber(8)];
   let curPath = 0;
 
   setInterval(() => {
     const obstacle = new _obstacle__WEBPACK_IMPORTED_MODULE_2___default.a(ctx, curPattern[curPath]);
     curPath += 1;
     if (curPath >= curPattern.length) {
-      curPattern = _patterns[_util__WEBPACK_IMPORTED_MODULE_3___default.a.randomNumber(8)];
+      curPattern = util.patterns[util.randomNumber(8)];
       curPath = 0;
     }
     obstacles.push(obstacle);
     obstacles.length > 20 ? obstacles.shift() : null;
-  }, 400);
+  }, 200);
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft'){
@@ -719,16 +740,23 @@ document.addEventListener('DOMContentLoaded', () => {
         paths[obst.path] = false;
       }
     });
+
     for (let i = 0; i < 8; i++) {
       if (!deathPaths.includes(i)) {
         paths[i] = false;
       }
     }
+
     player.render();
+
     if (paths[player.pos]) {
-      console.log('Game Over!');
+      player.damage();
     }
-    window.requestAnimationFrame(renderGame);
+    if (player.shields <= 0) {
+      console.log('Game Over!');
+    } else {
+      window.requestAnimationFrame(renderGame);
+    }
   };
   window.requestAnimationFrame(renderGame);
 });
