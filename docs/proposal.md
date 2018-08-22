@@ -44,8 +44,8 @@ Upon 'Game Over' a scoreboard modal will slide down listing the player's previou
 ### MVPs
 - [x] Basic visuals and an interactive interface.
 - [x] Player can move avatar around the circle.
-- [ ] Obstacles generate and move outward toward the edge of the circle.
-- [ ] Obstacles cause 'Game Over' upon collision.
+- [x] Obstacles generate and move outward toward the edge of the circle.
+- [x] Obstacles cause 'Game Over' upon collision.
 - [ ] Window styling scoreboard modal.
 - [ ] Scoreboard data is stored.
 
@@ -63,11 +63,11 @@ Upon 'Game Over' a scoreboard modal will slide down listing the player's previou
 
 ##### Day 2:
 - [x] Complete player avatar rendering and functionality.
-- [ ] Start obstacle rendering and functionality.
-- [ ] Ideally finish obstacle rendering and functionality.
+- [x] Start obstacle rendering and functionality.
+- [x] Ideally finish obstacle rendering and functionality.
 
 ##### Day 3:
-- [ ] Implement obstacle/player collision.
+- [x] Implement obstacle/player collision.
 - [ ] Finish game over condition.
 - [ ] Scoreboard rendering.
 
