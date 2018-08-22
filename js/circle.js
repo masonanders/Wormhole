@@ -20,7 +20,6 @@ class Circle {
     ctx.arc(300, 300, this.radius, 0, Math.PI * 2, false);
     ctx.stroke();
     ctx.closePath();
-
   }
 
   render() {
