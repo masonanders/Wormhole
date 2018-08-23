@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href='./css/reset.css' >
     <link rel="stylesheet" href='./css/base.css' >
+    <link rel="stylesheet" href='./css/scoreboard.css' >
     <link
       href="https://fonts.googleapis.com/css?family=Press+Start+2P"
       rel="stylesheet">
@@ -9,6 +11,14 @@
     <title>Wormhole</title>
   </head>
   <body>
+    <div id='scoreboard-container' class='scoreboard-container'>
+      <div class='scoreboard'>
+        <h2>Game Over!</h2>
+        <h4>you scored:</h4>
+        <h4 id='player-score'>12.5</h4>
+        <button id='play-again'>Play Again?</button>
+      </div>
+    </div>
     <div>
       <h1>WORMHOLE</h1>
       <div class='developer-links'>

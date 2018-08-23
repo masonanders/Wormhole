@@ -1,0 +1,53 @@
+.scoreboard-container {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.scoreboard {
+  align-content: space-between;
+  align-items: center;
+  background-color: rgb(100, 100, 100);
+  border: 5px solid rgb(200, 200, 200);
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  justify-content: center;
+  width: 40%;
+}
+
+.scoreboard h2 {
+  color: red;
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 2px 2px black;
+  margin-bottom: 30px;
+}
+
+.scoreboard h4 {
+  font-family: 'Press Start 2P', cursive;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.scoreboard button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 15px;
+  margin-top: 20px;
+  padding: 10px 15px;
+}
+
+.scoreboard button:hover {
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+.open {
+  z-index: 2
+}

@@ -12,6 +12,10 @@ class Util {
     ];
   }
 
+  randomPattern() {
+    return this.patterns[this.randomNumber(8)];
+  }
+
   randomNumber(max) {
     let n;
     n = Math.floor(Math.random() * (max));

@@ -81,18 +81,62 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js/wormhole.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./js/app.js");
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./js/app.js":
+/*!*******************!*\
+  !*** ./js/app.js ***!
+  \*******************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wormhole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./wormhole */ "./js/wormhole.js");
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // TODO Remove console.log() after development
+  console.log('Webpack is live!');
+
+  const canvas = document.getElementById('wormhole');
+  const ctx = canvas.getContext('2d');
+
+  let game = null;
+
+  const scoreboard = document.getElementById('scoreboard-container');
+  const playAgain = document.getElementById('play-again');
+
+  playAgain.addEventListener('click', (e) => {
+    playGame();
+    scoreboard.className = 'scoreboard-container';
+  });
+
+  const playGame = () => {
+    game = new _wormhole__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
+
+    game.play();
+    game.setupDone = true;
+  };
+  playGame();
+  window.requestAnimationFrame(game.renderGame);
+});
+
+
+/***/ }),
 
 /***/ "./js/board.js":
 /*!*********************!*\
   !*** ./js/board.js ***!
   \*********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 class Board {
   constructor(ctx) {
     this.ctx = ctx;
@@ -293,7 +337,7 @@ class Board {
   }
 }
 
-module.exports = Board;
+/* harmony default export */ __webpack_exports__["default"] = (Board);
 
 
 /***/ }),
@@ -644,6 +688,10 @@ class Util {
     ];
   }
 
+  randomPattern() {
+    return this.patterns[this.randomNumber(8)];
+  }
+
   randomNumber(max) {
     let n;
     n = Math.floor(Math.random() * (max));
@@ -660,13 +708,12 @@ module.exports = Util;
 /*!************************!*\
   !*** ./js/wormhole.js ***!
   \************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board */ "./js/board.js");
-/* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_board__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./player */ "./js/player.js");
 /* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_player__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _obstacle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./obstacle */ "./js/obstacle.js");
@@ -678,58 +725,64 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  // TODO Remove console.log() after development
-  console.log('Webpack is live!');
+class Wormhole {
+  constructor(ctx) {
+    this.paths = {
+      0: false,
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false
+    };
 
-  const canvas = document.getElementById('wormhole');
-  const ctx = canvas.getContext('2d');
+    this.ctx = ctx;
 
-  const paths = {
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false
-  };
+    this.board = new _board__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
+    this.player = new _player__WEBPACK_IMPORTED_MODULE_1___default.a(ctx);
+    this.obstacles = [];
+    this.circles = [];
+    this.util = new _util__WEBPACK_IMPORTED_MODULE_3___default.a();
 
-  const board = new _board__WEBPACK_IMPORTED_MODULE_0___default.a(ctx);
-  const player = new _player__WEBPACK_IMPORTED_MODULE_1___default.a(ctx);
-  const obstacles = [];
-  const circles = [];
-  const util = new _util__WEBPACK_IMPORTED_MODULE_3___default.a();
+    this.curShipPath = 0;
+    this.curPattern = this.util.patterns[this.util.randomNumber(8)];
+    this.curPath = 0;
 
-  let curShipPath = 0;
+    this.renderGame = this.renderGame.bind(this);
+  }
 
-  let curPattern = util.patterns[util.randomNumber(8)];
-  let curPath = 0;
+  play() {
+    const { ctx, obstacles, player, util } = this;
+    let { curPath, curPattern } = this;
 
-  setInterval(() => {
-    const obstacle = new _obstacle__WEBPACK_IMPORTED_MODULE_2___default.a(ctx, curPattern[curPath]);
-    curPath += 1;
-    if (curPath >= curPattern.length) {
-      curPattern = util.patterns[util.randomNumber(8)];
-      curPath = 0;
-    }
-    obstacles.push(obstacle);
-    obstacles.length > 20 ? obstacles.shift() : null;
-  }, 200);
+    setInterval(() => {
+      const obstacle = new _obstacle__WEBPACK_IMPORTED_MODULE_2___default.a(ctx, curPattern[curPath]);
+      curPath = curPath + 1;
+      if (curPath >= curPattern.length) {
+        curPattern = util.randomPattern();
+        curPath = 0;
+      }
+      obstacles.push(obstacle);
+      obstacles.length > 20 ? obstacles.shift() : null;
+    }, 200);
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft'){
-      player.moveLeft();
-    } else if (e.key === 'ArrowRight'){
-      player.moveRight();
-    }
-  });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft'){
+        player.moveLeft();
+      } else if (e.key === 'ArrowRight'){
+        player.moveRight();
+      }
+    });
+    this.renderGame();
+  }
 
-
-  const renderGame = () => {
-    board.render();
+  renderGame() {
+    const { board, obstacles, paths, player, renderGame } = this;
     const deathPaths = [];
+
+    board.render();
     obstacles.forEach(obst => {
       obst.render();
 
@@ -753,13 +806,15 @@ document.addEventListener('DOMContentLoaded', () => {
       player.damage();
     }
     if (player.shields <= 0) {
-      console.log('Game Over!');
+      const scoreboard = document.getElementById('scoreboard-container');
+      scoreboard.className = 'scoreboard-container open';
     } else {
       window.requestAnimationFrame(renderGame);
     }
-  };
-  window.requestAnimationFrame(renderGame);
-});
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Wormhole);
 
 
 /***/ })

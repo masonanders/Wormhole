@@ -1,5 +1,9 @@
 body {
   background-color: black;
+  height: 100%;
+  margin: 0;
+  position: relative;
+  width: 100%;
 }
 
 h1 {
@@ -32,6 +36,7 @@ a {
   background-size: cover;
   height: 25px;
   width: 25px;
+  z-index: 2;
 }
 
 .github-link {
@@ -39,4 +44,5 @@ a {
   background-size: cover;
   height: 25px;
   width: 25px;
+  z-index: 2;
 }

@@ -3,58 +3,64 @@ import Player from './player';
 import Obstacle from './obstacle';
 import Util from './util';
 
-document.addEventListener('DOMContentLoaded', () => {
-  // TODO Remove console.log() after development
-  console.log('Webpack is live!');
+class Wormhole {
+  constructor(ctx) {
+    this.paths = {
+      0: false,
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false
+    };
 
-  const canvas = document.getElementById('wormhole');
-  const ctx = canvas.getContext('2d');
+    this.ctx = ctx;
 
-  const paths = {
-    0: false,
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: false,
-    7: false
-  };
+    this.board = new Board(ctx);
+    this.player = new Player(ctx);
+    this.obstacles = [];
+    this.circles = [];
+    this.util = new Util();
 
-  const board = new Board(ctx);
-  const player = new Player(ctx);
-  const obstacles = [];
-  const circles = [];
-  const util = new Util();
+    this.curShipPath = 0;
+    this.curPattern = this.util.patterns[this.util.randomNumber(8)];
+    this.curPath = 0;
 
-  let curShipPath = 0;
+    this.renderGame = this.renderGame.bind(this);
+  }
 
-  let curPattern = util.patterns[util.randomNumber(8)];
-  let curPath = 0;
+  play() {
+    const { ctx, obstacles, player, util } = this;
+    let { curPath, curPattern } = this;
 
-  setInterval(() => {
-    const obstacle = new Obstacle(ctx, curPattern[curPath]);
-    curPath += 1;
-    if (curPath >= curPattern.length) {
-      curPattern = util.patterns[util.randomNumber(8)];
-      curPath = 0;
-    }
-    obstacles.push(obstacle);
-    obstacles.length > 20 ? obstacles.shift() : null;
-  }, 200);
+    setInterval(() => {
+      const obstacle = new Obstacle(ctx, curPattern[curPath]);
+      curPath = curPath + 1;
+      if (curPath >= curPattern.length) {
+        curPattern = util.randomPattern();
+        curPath = 0;
+      }
+      obstacles.push(obstacle);
+      obstacles.length > 20 ? obstacles.shift() : null;
+    }, 200);
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft'){
-      player.moveLeft();
-    } else if (e.key === 'ArrowRight'){
-      player.moveRight();
-    }
-  });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft'){
+        player.moveLeft();
+      } else if (e.key === 'ArrowRight'){
+        player.moveRight();
+      }
+    });
+    this.renderGame();
+  }
 
-
-  const renderGame = () => {
-    board.render();
+  renderGame() {
+    const { board, obstacles, paths, player, renderGame } = this;
     const deathPaths = [];
+
+    board.render();
     obstacles.forEach(obst => {
       obst.render();
 
@@ -78,10 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
       player.damage();
     }
     if (player.shields <= 0) {
-      console.log('Game Over!');
+      const scoreboard = document.getElementById('scoreboard-container');
+      scoreboard.className = 'scoreboard-container open';
     } else {
       window.requestAnimationFrame(renderGame);
     }
-  };
-  window.requestAnimationFrame(renderGame);
-});
+  }
+}
+
+export default Wormhole;
