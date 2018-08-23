@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('wormhole');
   const ctx = canvas.getContext('2d');
 
-  let game = null;
+  let game = new Wormhole(ctx);
 
   const scoreboard = document.getElementById('scoreboard-container');
   const playAgain = document.getElementById('play-again');
@@ -23,6 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     game.play();
     game.setupDone = true;
   };
+
   playGame();
-  window.requestAnimationFrame(game.renderGame);
 });

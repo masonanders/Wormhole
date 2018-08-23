@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('wormhole');
   const ctx = canvas.getContext('2d');
 
-  let game = null;
+  let game = new _wormhole__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
 
   const scoreboard = document.getElementById('scoreboard-container');
   const playAgain = document.getElementById('play-again');
@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     game.play();
     game.setupDone = true;
   };
+
   playGame();
-  window.requestAnimationFrame(game.renderGame);
 });
 
 
@@ -742,9 +742,10 @@ class Wormhole {
 
     this.board = new _board__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
     this.player = new _player__WEBPACK_IMPORTED_MODULE_1___default.a(ctx);
+    this.util = new _util__WEBPACK_IMPORTED_MODULE_3___default.a();
     this.obstacles = [];
     this.circles = [];
-    this.util = new _util__WEBPACK_IMPORTED_MODULE_3___default.a();
+    this.score = 0;
 
     this.curShipPath = 0;
     this.curPattern = this.util.patterns[this.util.randomNumber(8)];
@@ -775,7 +776,27 @@ class Wormhole {
         player.moveRight();
       }
     });
+    this.startScore();
     this.renderGame();
+  }
+
+  startScore() {
+    if (!this.gameOver) {
+      setTimeout(() => {
+        this.score += 1;
+        this.startScore();
+      }, 10);
+    }
+  }
+
+  renderScore() {
+    const ctx = this.ctx;
+
+    ctx.strokeStyle = '#eeeeee';
+    ctx.font = '15px Arial';
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#999999';
+    ctx.fillText(this.score, 550, 21);
   }
 
   renderGame() {
@@ -800,15 +821,18 @@ class Wormhole {
       }
     }
 
+    this.renderScore();
     player.render();
 
-    if (paths[player.pos]) {
-      player.damage();
-    }
     if (player.shields <= 0) {
+      const score = document.getElementById('player-score');
+      score.innerHTML = this.score;
       const scoreboard = document.getElementById('scoreboard-container');
       scoreboard.className = 'scoreboard-container open';
     } else {
+      if (paths[player.pos]) {
+        player.damage();
+      }
       window.requestAnimationFrame(renderGame);
     }
   }

@@ -19,6 +19,10 @@ a {
   margin-right: 10px;
 }
 
+canvas {
+  cursor: none;
+}
+
 .developer-links {
   display: flex;
   justify-content: flex-end;

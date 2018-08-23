@@ -20,9 +20,10 @@ class Wormhole {
 
     this.board = new Board(ctx);
     this.player = new Player(ctx);
+    this.util = new Util();
     this.obstacles = [];
     this.circles = [];
-    this.util = new Util();
+    this.score = 0;
 
     this.curShipPath = 0;
     this.curPattern = this.util.patterns[this.util.randomNumber(8)];
@@ -53,7 +54,27 @@ class Wormhole {
         player.moveRight();
       }
     });
+    this.startScore();
     this.renderGame();
+  }
+
+  startScore() {
+    if (!this.gameOver) {
+      setTimeout(() => {
+        this.score += 1;
+        this.startScore();
+      }, 10);
+    }
+  }
+
+  renderScore() {
+    const ctx = this.ctx;
+
+    ctx.strokeStyle = '#eeeeee';
+    ctx.font = '15px Arial';
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#999999';
+    ctx.fillText(this.score, 550, 21);
   }
 
   renderGame() {
@@ -78,15 +99,18 @@ class Wormhole {
       }
     }
 
+    this.renderScore();
     player.render();
 
-    if (paths[player.pos]) {
-      player.damage();
-    }
     if (player.shields <= 0) {
+      const score = document.getElementById('player-score');
+      score.innerHTML = this.score;
       const scoreboard = document.getElementById('scoreboard-container');
       scoreboard.className = 'scoreboard-container open';
     } else {
+      if (paths[player.pos]) {
+        player.damage();
+      }
       window.requestAnimationFrame(renderGame);
     }
   }
