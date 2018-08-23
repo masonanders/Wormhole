@@ -107,12 +107,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let game = new _wormhole__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
 
-  const scoreboard = document.getElementById('scoreboard-container');
+  const scoreboardContainer = document.getElementById('scoreboard-container');
+  const scoreboard = document.getElementById('scoreboard');
   const playAgain = document.getElementById('play-again');
 
   playAgain.addEventListener('click', (e) => {
     playGame();
-    scoreboard.className = 'scoreboard-container';
+    scoreboardContainer.className = 'scoreboard-container';
+    scoreboard.className = 'scoreboard';
   });
 
   const playGame = () => {
@@ -379,8 +381,8 @@ class Obstacle {
     this.length = (this.radius / 10) * 3.5;
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgb(0, 255, 0)';
-    ctx.fillStyle = 'rgb(0, 255, 0)';
+    ctx.strokeStyle = `rgba(255, 0, 0, ${ this.radius / 50 })`;
+    ctx.fillStyle = `rgba(255, 0, 0, ${ this.radius / 50 })`;
     ctx.arc(
       300,
       300,
@@ -800,8 +802,12 @@ class Wormhole {
   }
 
   renderGame() {
-    const { board, obstacles, paths, player, renderGame } = this;
+    const { board, ctx, obstacles, paths, player, renderGame } = this;
     const deathPaths = [];
+
+    // ctx.save();
+    // ctx.transform(1, 1, 0, 1, 0, 0);
+    // ctx.load();
 
     board.render();
     obstacles.forEach(obst => {
@@ -827,8 +833,10 @@ class Wormhole {
     if (player.shields <= 0) {
       const score = document.getElementById('player-score');
       score.innerHTML = this.score;
-      const scoreboard = document.getElementById('scoreboard-container');
-      scoreboard.className = 'scoreboard-container open';
+      const scoreboardContainer = document.getElementById('scoreboard-container');
+      const scoreboard = document.getElementById('scoreboard');
+      scoreboardContainer.className = 'scoreboard-container show';
+      scoreboard.className = 'scoreboard open';
     } else {
       if (paths[player.pos]) {
         player.damage();

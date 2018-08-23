@@ -9,12 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let game = new Wormhole(ctx);
 
-  const scoreboard = document.getElementById('scoreboard-container');
+  const scoreboardContainer = document.getElementById('scoreboard-container');
+  const scoreboard = document.getElementById('scoreboard');
   const playAgain = document.getElementById('play-again');
 
   playAgain.addEventListener('click', (e) => {
     playGame();
-    scoreboard.className = 'scoreboard-container';
+    scoreboardContainer.className = 'scoreboard-container';
+    scoreboard.className = 'scoreboard';
   });
 
   const playGame = () => {

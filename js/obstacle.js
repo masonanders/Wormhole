@@ -28,8 +28,8 @@ class Obstacle {
     this.length = (this.radius / 10) * 3.5;
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgb(0, 255, 0)';
-    ctx.fillStyle = 'rgb(0, 255, 0)';
+    ctx.strokeStyle = `rgba(255, 0, 0, ${ this.radius / 50 })`;
+    ctx.fillStyle = `rgba(255, 0, 0, ${ this.radius / 50 })`;
     ctx.arc(
       300,
       300,

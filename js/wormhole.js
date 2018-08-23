@@ -78,8 +78,12 @@ class Wormhole {
   }
 
   renderGame() {
-    const { board, obstacles, paths, player, renderGame } = this;
+    const { board, ctx, obstacles, paths, player, renderGame } = this;
     const deathPaths = [];
+
+    // ctx.save();
+    // ctx.transform(1, 1, 0, 1, 0, 0);
+    // ctx.load();
 
     board.render();
     obstacles.forEach(obst => {
@@ -105,8 +109,10 @@ class Wormhole {
     if (player.shields <= 0) {
       const score = document.getElementById('player-score');
       score.innerHTML = this.score;
-      const scoreboard = document.getElementById('scoreboard-container');
-      scoreboard.className = 'scoreboard-container open';
+      const scoreboardContainer = document.getElementById('scoreboard-container');
+      const scoreboard = document.getElementById('scoreboard');
+      scoreboardContainer.className = 'scoreboard-container show';
+      scoreboard.className = 'scoreboard open';
     } else {
       if (paths[player.pos]) {
         player.damage();
