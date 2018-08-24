@@ -22,7 +22,7 @@ Objects grow in size and speed as they move away from the middle of the screen c
 
 Instead of randomly generating obstacle paths, which would occasionally send obstacles flying down the same few paths multiple times due to the random nature of randomness, I decided to write several short, pre-determined patterns. Those patters were stored in an array and executed one at a time. Once a pattern had completed it's lifecycle, another pattern was then chosen at random to maintain an unpredictable experience.
 
-![patterns](./docs/screenshots/patterns.png)
+<img src="./docs/screenshots/patterns.png" alt="patterns" width="500"/>
 
 #### Efficient Collision Detection
 
@@ -31,7 +31,7 @@ Since the ship's distance from the center of the circle is constant and the posi
 
 Rather than keep track of the ship's and each object's occupied coordinates and their areas, I instead kept track of each of the eight section's states. Sections are stored in an object with their id as a key and state as a boolean value of each key. If an obstacle's outer radius is greater than that of the radius of the ship's front and it's inner radius is less than that of the ship's back, that section becomes a "danger" section. If the ship exists in a section while it is in a "danger" state, the player takes damage for each frame that it maintains a "danger" state.
 
-![death-paths](./docs/screenshots/death-paths.png)
+<img src="./docs/screenshots/death-paths.png" alt="death-paths" width="500"/>
 
 This checks each obstacle and if it is in a "danger zone" it's section's "danger" state is set to `true` and the id is pushed to a local array. Otherwise if the obstacle is not in a "danger zone" and it's section is *not* included in the current array of `deathPaths` it changes it's section's "danger state" to `false`. Lastly any section that has no obstacle currently in it has it's "danger" state reset to `false`.
 
