@@ -34,8 +34,8 @@ class Wormhole {
     this.renderElements = this.renderElements.bind(this);
     this.renderGame = this.renderGame.bind(this);
 
-    this.audio = document.createElement('AUDIO');
-    this.audio.src = './docs/Blipotron.mp3';
+    this.audio = document.getElementById('game-audio');
+    this.audio.load();
   }
 
   play() {
@@ -79,7 +79,7 @@ class Wormhole {
     const ctx = this.ctx;
 
     ctx.strokeStyle = '#eeeeee';
-    ctx.font = '15px Arial';
+    ctx.font = '18px Arial';
     ctx.lineWidth = 1;
     ctx.fillStyle = '#999999';
     ctx.fillText(this.score, 550, 21);

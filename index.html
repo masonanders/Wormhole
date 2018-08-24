@@ -10,6 +10,7 @@
       rel="stylesheet">
     <meta charset="utf-8">
     <title>Wormhole</title>
+    <audio id='game-audio' src='./docs/Blipotron.mp3'></audio>
   </head>
   <body>
     <div id='scoreboard-container' class='scoreboard-container show'>
@@ -28,7 +29,11 @@
         <button id='start-game'>Start game!</button>
       </div>
     </div>
-    <div>
+
+    <div class='header'>
+      <div class='mute-container'>
+        <button id='mute' class='mute'/>
+      </div>
       <h1>WORMHOLE</h1>
       <div class='developer-links'>
         <a
@@ -41,7 +46,7 @@
     </div>
 
     <div class='canvas-div'>
-      <canvas id='wormhole' width='600px' height='600px'><p>Points!</p></canvas>
+      <canvas id='wormhole' width='600px' height='600px'></canvas>
       <script type='application/javascript' src='./bundle.js' ></script>
     </div>
   </body>

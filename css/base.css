@@ -10,24 +10,49 @@ h1 {
   color: #21ecff;
   font-family: 'Press Start 2P', cursive;
   font-size: 40px;
-  margin: 10px 0;
+  margin: 0;
   text-align: center;
 }
 
 a {
   cursor: pointer;
-  margin-right: 10px;
 }
 
 canvas {
   cursor: none;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 15px 50px 15px;
+}
+
 .developer-links {
   display: flex;
   justify-content: flex-end;
-  position: relative;
-  top: -55px;
+}
+
+.mute-container {
+  display: flex;
+  justify-content: flex-start;
+  min-width: 70px;
+}
+
+.mute {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url('../docs/images/volume.png'); /* image by Xinh Studio at https://www.iconfinder.com/xinhstudio; for personal use only */
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  height: 25px;
+  padding: 0;
+  width: 25px;
+  z-index: 2;
+}
+
+.on {
+  background-image: url('../docs/images/mute.png'); /* image by Xinh Studio at https://www.iconfinder.com/xinhstudio; for personal use only */
 }
 
 .canvas-div {
@@ -47,6 +72,7 @@ canvas {
   background-image: url('../docs/images/github.png');
   background-size: cover;
   height: 25px;
+  margin-right: 10px;
   width: 25px;
   z-index: 2;
 }

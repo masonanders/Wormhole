@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const startMenu = document.getElementById('start-menu');
   const playAgain = document.getElementById('play-again');
   const startGame = document.getElementById('start-game');
+  const muteButton = document.getElementById('mute');
+  const gameAudio = document.getElementById('game-audio');
+
+  gameAudio.autoplay = false;
 
   playAgain.addEventListener('click', (e) => {
     scoreboardContainer.className = 'scoreboard-container';
@@ -26,6 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     scoreboardContainer.className = 'scoreboard-container';
     startMenu.setAttribute('style', 'visibility: hidden;');
     playGame();
+  });
+
+  muteButton.addEventListener('click', (e) => {
+    muteButton.className = muteButton.className === 'mute' ? 'mute on' : 'mute';
+    gameAudio.muted = muteButton.className === 'mute on' ? true : false;
   });
 
   const playGame = () => {
