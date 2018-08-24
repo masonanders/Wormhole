@@ -208,8 +208,8 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.arc(300, 300, 10, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(255, 40, 230, 0.1)';
+    ctx.arc(300, 300, 15, 0, Math.PI * 2, false);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
     ctx.fill();
     ctx.closePath();
   }
@@ -352,7 +352,7 @@ class Board {
   render() {
     const newStar = new _stars__WEBPACK_IMPORTED_MODULE_0__["default"](this.ctx, this.speed);
     this.stars.push(newStar);
-    
+
     this.background();
     this.rings();
     this.lines();
