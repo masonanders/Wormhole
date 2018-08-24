@@ -918,7 +918,7 @@ class Wormhole {
 
     renderElements();
 
-    if (player.shields < 0) {
+    if (player.shields <= 0) {
       this.audio.pause();
       const score = document.getElementById('player-score');
       score.innerHTML = this.score;
