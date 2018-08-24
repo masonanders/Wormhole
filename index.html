@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href='./css/reset.css' >
+    <link rel="stylesheet" href='./css/start.css' >
     <link rel="stylesheet" href='./css/base.css' >
     <link rel="stylesheet" href='./css/scoreboard.css' >
     <link
@@ -9,15 +10,22 @@
       rel="stylesheet">
     <meta charset="utf-8">
     <title>Wormhole</title>
-    <!-- <audio id='game-music' src='./docs/Blipotron.mp3' /> -->
   </head>
   <body>
-    <div id='scoreboard-container' class='scoreboard-container'>
+    <div id='scoreboard-container' class='scoreboard-container show'>
       <div id='scoreboard' class='scoreboard'>
         <h2>Game Over!</h2>
         <h4>you scored:</h4>
         <h4 id='player-score'></h4>
         <button id='play-again'>Play Again?</button>
+      </div>
+
+      <div id='start-menu' class='start-menu'>
+        <h3>Welcome to</h3>
+        <h2>Wormhole</h2>
+        <p>Press left and right on your keyboard to navigate</p>
+        <p>Avoid the red obstacles, if your shields run out it's game over!</p>
+        <button id='start-game'>Start game!</button>
       </div>
     </div>
     <div>
@@ -33,7 +41,7 @@
     </div>
 
     <div class='canvas-div'>
-      <canvas id='wormhole' width='600px' height='600px'></canvas>
+      <canvas id='wormhole' width='600px' height='600px'><p>Points!</p></canvas>
       <script type='application/javascript' src='./bundle.js' ></script>
     </div>
   </body>

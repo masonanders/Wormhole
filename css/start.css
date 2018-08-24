@@ -1,0 +1,52 @@
+.start-menu {
+  align-content: space-between;
+  align-items: center;
+  background-color: rgb(100, 100, 100);
+  border: 5px solid rgb(200, 200, 200);
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: space-around;
+  position: absolute;
+  width: 40%;
+  z-index: 3;
+}
+
+.start-menu h2 {
+  color: #21ecff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 30px;
+  text-shadow: 3px 3px black;
+  margin-top: 0;
+}
+
+.start-menu h3 {
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 13px;
+  margin: 30px 0 0 0;
+}
+
+.start-menu p {
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  margin: 0 15px;
+  text-align: center;
+}
+
+.start-menu button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  color: black;
+  cursor: pointer;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 15px;
+  padding: 10px 15px;
+  margin: 10px 0 30px 0;
+}
+
+.start-menu button:hover {
+  color: white;
+  text-shadow: 2px 2px black;
+}
