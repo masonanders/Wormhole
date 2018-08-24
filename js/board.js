@@ -4,7 +4,6 @@ class Board {
   constructor(ctx, speed) {
     this.ctx = ctx;
     this.speed = speed;
-
     this.stars = [];
   }
 
@@ -198,6 +197,7 @@ class Board {
   render() {
     const newStar = new Star(this.ctx, this.speed);
     this.stars.push(newStar);
+    
     this.background();
     this.rings();
     this.lines();

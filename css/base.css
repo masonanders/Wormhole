@@ -14,14 +14,6 @@ h1 {
   text-align: center;
 }
 
-a {
-  cursor: pointer;
-}
-
-canvas {
-  cursor: none;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -61,7 +53,7 @@ canvas {
 }
 
 .linkedin-link {
-  background-image: url('../docs/images/linked-in.png');
+  background-image: url('../docs/images/linked-in.png'); /* image provided by Linked-In is under copywrite law */
   background-size: cover;
   height: 25px;
   width: 25px;
@@ -69,7 +61,7 @@ canvas {
 }
 
 .github-link {
-  background-image: url('../docs/images/github.png');
+  background-image: url('../docs/images/github.png'); /* image provided by Github is under copywrite law */
   background-size: cover;
   height: 25px;
   margin-right: 10px;

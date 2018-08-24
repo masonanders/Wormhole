@@ -15,9 +15,9 @@
   border: 5px solid rgb(200, 200, 200);
   display: flex;
   flex-direction: column;
-  height: 0%;
+  height: 0;
   justify-content: center;
-  width: 0%;
+  width: 0;
 }
 
 .scoreboard h2 {

@@ -1,9 +1,6 @@
 import Wormhole from './wormhole';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // TODO Remove console.log() after development
-  console.log('Webpack is live!');
-
   const canvas = document.getElementById('wormhole');
   const ctx = canvas.getContext('2d');
 
@@ -20,19 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   gameAudio.autoplay = false;
 
-  playAgain.addEventListener('click', (e) => {
+  playAgain.addEventListener('click', () => {
     scoreboardContainer.className = 'scoreboard-container';
     scoreboard.className = 'scoreboard';
     playGame();
   });
 
-  startGame.addEventListener('click', (e) => {
+  startGame.addEventListener('click', () => {
     scoreboardContainer.className = 'scoreboard-container';
     startMenu.setAttribute('style', 'visibility: hidden;');
     playGame();
   });
 
-  muteButton.addEventListener('click', (e) => {
+  muteButton.addEventListener('click', () => {
     muteButton.className = muteButton.className === 'mute' ? 'mute on' : 'mute';
     gameAudio.muted = muteButton.className === 'mute on' ? true : false;
   });

@@ -15,6 +15,7 @@ class Player {
 
   drawShip() {
     const ctx = this.ctx;
+
     ctx.beginPath();
     ctx.strokeStyle = `rgb(50, 70, 255)`;
     ctx.fillStyle = `rgb(50, 70, 255)`;

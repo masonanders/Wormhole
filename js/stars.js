@@ -19,7 +19,10 @@ class Star {
 
   drawStar() {
     const ctx = this.ctx;
-    const opacity = Math.hypot(Math.abs(this.curX - 300), Math.abs(this.curY-300)) / 300;
+    const opacity = Math.hypot(
+      Math.abs(this.curX - 300),
+      Math.abs(this.curY - 300)
+    ) / 300;
 
     ctx.beginPath();
     ctx.strokeStyle = `rgba(200, 200, 200, ${opacity})`;

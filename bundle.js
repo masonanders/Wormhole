@@ -99,9 +99,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  // TODO Remove console.log() after development
-  console.log('Webpack is live!');
-
   const canvas = document.getElementById('wormhole');
   const ctx = canvas.getContext('2d');
 
@@ -118,19 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   gameAudio.autoplay = false;
 
-  playAgain.addEventListener('click', (e) => {
+  playAgain.addEventListener('click', () => {
     scoreboardContainer.className = 'scoreboard-container';
     scoreboard.className = 'scoreboard';
     playGame();
   });
 
-  startGame.addEventListener('click', (e) => {
+  startGame.addEventListener('click', () => {
     scoreboardContainer.className = 'scoreboard-container';
     startMenu.setAttribute('style', 'visibility: hidden;');
     playGame();
   });
 
-  muteButton.addEventListener('click', (e) => {
+  muteButton.addEventListener('click', () => {
     muteButton.className = muteButton.className === 'mute' ? 'mute on' : 'mute';
     gameAudio.muted = muteButton.className === 'mute on' ? true : false;
   });
@@ -162,7 +159,6 @@ class Board {
   constructor(ctx, speed) {
     this.ctx = ctx;
     this.speed = speed;
-
     this.stars = [];
   }
 
@@ -356,6 +352,7 @@ class Board {
   render() {
     const newStar = new _stars__WEBPACK_IMPORTED_MODULE_0__["default"](this.ctx, this.speed);
     this.stars.push(newStar);
+    
     this.background();
     this.rings();
     this.lines();
@@ -463,6 +460,7 @@ class Player {
 
   drawShip() {
     const ctx = this.ctx;
+
     ctx.beginPath();
     ctx.strokeStyle = `rgb(50, 70, 255)`;
     ctx.fillStyle = `rgb(50, 70, 255)`;
@@ -729,7 +727,10 @@ class Star {
 
   drawStar() {
     const ctx = this.ctx;
-    const opacity = Math.hypot(Math.abs(this.curX - 300), Math.abs(this.curY-300)) / 300;
+    const opacity = Math.hypot(
+      Math.abs(this.curX - 300),
+      Math.abs(this.curY - 300)
+    ) / 300;
 
     ctx.beginPath();
     ctx.strokeStyle = `rgba(200, 200, 200, ${opacity})`;
