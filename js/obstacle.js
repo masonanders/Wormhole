@@ -1,8 +1,8 @@
 class Obstacle {
-  constructor(ctx, path) {
+  constructor(ctx, path, speed) {
     this.ctx = ctx;
     this.radius = 1;
-    this.speed = 1.09;
+    this.speed = speed;
     this.path = path;
     this.begin = 0;
     this.end = 0;

@@ -16,6 +16,11 @@ class Util {
     return this.patterns[this.randomNumber(8)];
   }
 
+  makePosOrNeg(num) {
+    const random = this.randomNumber(10);
+    return random % 2 === 0 ? Math.abs(num) : -Math.abs(num);  
+  }
+
   randomNumber(max) {
     let n;
     n = Math.floor(Math.random() * (max));

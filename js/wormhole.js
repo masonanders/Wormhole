@@ -17,8 +17,9 @@ class Wormhole {
     };
 
     this.ctx = ctx;
+    this.speed = 1.09;
 
-    this.board = new Board(ctx);
+    this.board = new Board(ctx, this.speed);
     this.player = new Player(ctx);
     this.util = new Util();
     this.obstacles = [];
@@ -29,7 +30,12 @@ class Wormhole {
     this.curPattern = this.util.patterns[this.util.randomNumber(8)];
     this.curPath = 0;
 
+    this.renderPreview = this.renderPreview.bind(this);
+    this.renderElements = this.renderElements.bind(this);
     this.renderGame = this.renderGame.bind(this);
+
+    this.audio = document.createElement('AUDIO');
+    this.audio.src = './docs/Blipotron.mp3';
   }
 
   play() {
@@ -37,7 +43,7 @@ class Wormhole {
     let { curPath, curPattern } = this;
 
     setInterval(() => {
-      const obstacle = new Obstacle(ctx, curPattern[curPath]);
+      const obstacle = new Obstacle(ctx, curPattern[curPath], this.speed);
       curPath = curPath + 1;
       if (curPath >= curPattern.length) {
         curPattern = util.randomPattern();
@@ -54,6 +60,8 @@ class Wormhole {
         player.moveRight();
       }
     });
+
+    this.audio.play();
     this.startScore();
     this.renderGame();
   }
@@ -77,13 +85,9 @@ class Wormhole {
     ctx.fillText(this.score, 550, 21);
   }
 
-  renderGame() {
+  renderElements() {
     const { board, ctx, obstacles, paths, player, renderGame } = this;
     const deathPaths = [];
-
-    // ctx.save();
-    // ctx.transform(1, 1, 0, 1, 0, 0);
-    // ctx.load();
 
     board.render();
     obstacles.forEach(obst => {
@@ -105,8 +109,20 @@ class Wormhole {
 
     this.renderScore();
     player.render();
+  }
 
-    if (player.shields <= 0) {
+  renderPreview() {
+    this.board.render();
+    window.requestAnimationFrame(this.renderPreview);
+  }
+
+  renderGame() {
+    const { ctx, player, paths, renderElements, renderGame } = this;
+
+    renderElements();
+
+    if (player.shields < 0) {
+      this.audio.pause();
       const score = document.getElementById('player-score');
       score.innerHTML = this.score;
       const scoreboardContainer = document.getElementById('scoreboard-container');
@@ -116,6 +132,10 @@ class Wormhole {
     } else {
       if (paths[player.pos]) {
         player.damage();
+        ctx.save();
+        ctx.rotate(2 * Math.PI / 360);
+        renderElements();
+        ctx.restore();
       }
       window.requestAnimationFrame(renderGame);
     }

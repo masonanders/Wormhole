@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
 
   let game = new _wormhole__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
+  game.renderPreview();
 
   const scoreboardContainer = document.getElementById('scoreboard-container');
   const scoreboard = document.getElementById('scoreboard');
@@ -139,9 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _stars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stars */ "./js/stars.js");
+
+
 class Board {
-  constructor(ctx) {
+  constructor(ctx, speed) {
     this.ctx = ctx;
+    this.speed = speed;
+
+    this.stars = [];
   }
 
   background() {
@@ -332,10 +339,16 @@ class Board {
   }
 
   render() {
+    const newStar = new _stars__WEBPACK_IMPORTED_MODULE_0__["default"](this.ctx, this.speed);
+    this.stars.push(newStar);
     this.background();
     this.rings();
-    this.eye();
     this.lines();
+    this.eye();
+    this.stars.forEach(star => {
+      star.render();
+      this.stars.length > 50 ? this.stars.shift() : null;
+    });
   }
 }
 
@@ -352,10 +365,10 @@ class Board {
 /***/ (function(module, exports) {
 
 class Obstacle {
-  constructor(ctx, path) {
+  constructor(ctx, path, speed) {
     this.ctx = ctx;
     this.radius = 1;
-    this.speed = 1.09;
+    this.speed = speed;
     this.path = path;
     this.begin = 0;
     this.end = 0;
@@ -669,6 +682,61 @@ module.exports = Player;
 
 /***/ }),
 
+/***/ "./js/stars.js":
+/*!*********************!*\
+  !*** ./js/stars.js ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util */ "./js/util.js");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_util__WEBPACK_IMPORTED_MODULE_0__);
+
+
+class Star {
+  constructor(ctx, speed, x = 300, y = 300) {
+    this.ctx = ctx;
+    this.speed = speed;
+
+    this.util = new _util__WEBPACK_IMPORTED_MODULE_0___default.a();
+
+    this.xDir = this.util.makePosOrNeg(Math.random());
+    this.yDir = this.util.makePosOrNeg(Math.random());
+    this.magnitude = Math.hypot(this.xDir, this.yDir);
+
+    this.curX = x;
+    this.curY = y;
+  }
+
+
+
+  drawStar() {
+    const ctx = this.ctx;
+    const opacity = Math.hypot(Math.abs(this.curX - 300), Math.abs(this.curY-300)) / 300;
+
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(200, 200, 200, ${opacity})`;
+    ctx.lineTo(this.curX, this.curY);
+    this.curX += (this.xDir / this.magnitude);
+    this.xDir *= this.speed;
+    this.curY += (this.yDir / this.magnitude);
+    this.yDir *= this.speed;
+    ctx.lineTo(this.curX, this.curY);
+    ctx.stroke();
+  }
+
+  render() {
+    this.drawStar();
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Star);
+
+
+/***/ }),
+
 /***/ "./js/util.js":
 /*!********************!*\
   !*** ./js/util.js ***!
@@ -692,6 +760,11 @@ class Util {
 
   randomPattern() {
     return this.patterns[this.randomNumber(8)];
+  }
+
+  makePosOrNeg(num) {
+    const random = this.randomNumber(10);
+    return random % 2 === 0 ? Math.abs(num) : -Math.abs(num);  
   }
 
   randomNumber(max) {
@@ -741,8 +814,9 @@ class Wormhole {
     };
 
     this.ctx = ctx;
+    this.speed = 1.09;
 
-    this.board = new _board__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
+    this.board = new _board__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, this.speed);
     this.player = new _player__WEBPACK_IMPORTED_MODULE_1___default.a(ctx);
     this.util = new _util__WEBPACK_IMPORTED_MODULE_3___default.a();
     this.obstacles = [];
@@ -753,7 +827,12 @@ class Wormhole {
     this.curPattern = this.util.patterns[this.util.randomNumber(8)];
     this.curPath = 0;
 
+    this.renderPreview = this.renderPreview.bind(this);
+    this.renderElements = this.renderElements.bind(this);
     this.renderGame = this.renderGame.bind(this);
+
+    this.audio = document.createElement('AUDIO');
+    this.audio.src = './docs/Blipotron.mp3';
   }
 
   play() {
@@ -761,7 +840,7 @@ class Wormhole {
     let { curPath, curPattern } = this;
 
     setInterval(() => {
-      const obstacle = new _obstacle__WEBPACK_IMPORTED_MODULE_2___default.a(ctx, curPattern[curPath]);
+      const obstacle = new _obstacle__WEBPACK_IMPORTED_MODULE_2___default.a(ctx, curPattern[curPath], this.speed);
       curPath = curPath + 1;
       if (curPath >= curPattern.length) {
         curPattern = util.randomPattern();
@@ -778,6 +857,8 @@ class Wormhole {
         player.moveRight();
       }
     });
+
+    this.audio.play();
     this.startScore();
     this.renderGame();
   }
@@ -801,13 +882,9 @@ class Wormhole {
     ctx.fillText(this.score, 550, 21);
   }
 
-  renderGame() {
+  renderElements() {
     const { board, ctx, obstacles, paths, player, renderGame } = this;
     const deathPaths = [];
-
-    // ctx.save();
-    // ctx.transform(1, 1, 0, 1, 0, 0);
-    // ctx.load();
 
     board.render();
     obstacles.forEach(obst => {
@@ -829,8 +906,20 @@ class Wormhole {
 
     this.renderScore();
     player.render();
+  }
 
-    if (player.shields <= 0) {
+  renderPreview() {
+    this.board.render();
+    window.requestAnimationFrame(this.renderPreview);
+  }
+
+  renderGame() {
+    const { ctx, player, paths, renderElements, renderGame } = this;
+
+    renderElements();
+
+    if (player.shields < 0) {
+      this.audio.pause();
       const score = document.getElementById('player-score');
       score.innerHTML = this.score;
       const scoreboardContainer = document.getElementById('scoreboard-container');
@@ -840,6 +929,10 @@ class Wormhole {
     } else {
       if (paths[player.pos]) {
         player.damage();
+        ctx.save();
+        ctx.rotate(2 * Math.PI / 360);
+        renderElements();
+        ctx.restore();
       }
       window.requestAnimationFrame(renderGame);
     }

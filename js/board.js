@@ -1,6 +1,11 @@
+import Star from './stars';
+
 class Board {
-  constructor(ctx) {
+  constructor(ctx, speed) {
     this.ctx = ctx;
+    this.speed = speed;
+
+    this.stars = [];
   }
 
   background() {
@@ -191,10 +196,16 @@ class Board {
   }
 
   render() {
+    const newStar = new Star(this.ctx, this.speed);
+    this.stars.push(newStar);
     this.background();
     this.rings();
-    this.eye();
     this.lines();
+    this.eye();
+    this.stars.forEach(star => {
+      star.render();
+      this.stars.length > 50 ? this.stars.shift() : null;
+    });
   }
 }
 

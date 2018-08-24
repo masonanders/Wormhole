@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
 
   let game = new Wormhole(ctx);
+  game.renderPreview();
 
   const scoreboardContainer = document.getElementById('scoreboard-container');
   const scoreboard = document.getElementById('scoreboard');
