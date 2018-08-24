@@ -47,8 +47,6 @@ Upon 'Game Over' a scoreboard modal will slide down listing the player's previou
 - [x] Obstacles generate and move outward toward the edge of the circle.
 - [x] Obstacles cause 'Game Over' upon collision.
 - [x] Window styling scoreboard modal.
-- [ ] Scoreboard data is stored.
-
 
 ### Development timeline
 
