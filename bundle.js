@@ -98,38 +98,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wormhole__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./wormhole */ "./js/wormhole.js");
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('wormhole');
-  const ctx = canvas.getContext('2d');
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("wormhole");
+  const ctx = canvas.getContext("2d");
 
   let game = new _wormhole__WEBPACK_IMPORTED_MODULE_0__["default"](ctx);
   game.renderPreview();
 
-  const scoreboardContainer = document.getElementById('scoreboard-container');
-  const scoreboard = document.getElementById('scoreboard');
-  const startMenu = document.getElementById('start-menu');
-  const playAgain = document.getElementById('play-again');
-  const startGame = document.getElementById('start-game');
-  const muteButton = document.getElementById('mute');
-  const gameAudio = document.getElementById('game-audio');
+  const scoreboardContainer = document.getElementById("scoreboard-container");
+  const scoreboard = document.getElementById("scoreboard");
+  const startMenu = document.getElementById("start-menu");
+  const playAgain = document.getElementById("play-again");
+  const startGame = document.getElementById("start-game");
+  const muteButton = document.getElementById("mute");
+  const gameAudio = document.getElementById("game-audio");
 
   gameAudio.autoplay = false;
 
-  playAgain.addEventListener('click', () => {
-    scoreboardContainer.className = 'scoreboard-container';
-    scoreboard.className = 'scoreboard';
+  playAgain.addEventListener("click", () => {
+    scoreboardContainer.className = "scoreboard-container";
+    scoreboard.className = "scoreboard";
     playGame();
   });
 
-  startGame.addEventListener('click', () => {
-    scoreboardContainer.className = 'scoreboard-container';
-    startMenu.setAttribute('style', 'visibility: hidden;');
+  startGame.addEventListener("click", () => {
+    scoreboardContainer.className = "scoreboard-container";
+    startMenu.setAttribute("style", "visibility: hidden;");
     playGame();
   });
 
-  muteButton.addEventListener('click', () => {
-    muteButton.className = muteButton.className === 'mute' ? 'mute on' : 'mute';
-    gameAudio.muted = muteButton.className === 'mute on' ? true : false;
+  muteButton.addEventListener("click", () => {
+    muteButton.className = muteButton.className === "mute" ? "mute on" : "mute";
+    gameAudio.muted = muteButton.className === "mute on" ? true : false;
   });
 
   const playGame = () => {
@@ -165,7 +165,7 @@ class Board {
   background() {
     const ctx = this.ctx;
 
-    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.fillStyle = "rgb(0, 0, 0)";
     ctx.fillRect(0, 0, 600, 600);
   }
 
@@ -175,18 +175,18 @@ class Board {
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.arc(300, 300, 290, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(255, 40, 230, 1)';
+    ctx.fillStyle = "rgba(255, 40, 230, 1)";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
     ctx.arc(300, 300, 275, 0, Math.PI * 2, false);
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = "#000000";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.05)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.05)";
     ctx.arc(300, 300, 5, 0, Math.PI * 2, false);
     ctx.stroke();
     ctx.closePath();
@@ -197,19 +197,19 @@ class Board {
 
     ctx.beginPath();
     ctx.arc(300, 300, 35, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(255, 40, 230, 0.05)';
+    ctx.fillStyle = "rgba(255, 40, 230, 0.05)";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
     ctx.arc(300, 300, 25, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(255, 40, 230, 0.05)';
+    ctx.fillStyle = "rgba(255, 40, 230, 0.05)";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
     ctx.arc(300, 300, 15, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+    ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
     ctx.fill();
     ctx.closePath();
   }
@@ -218,8 +218,8 @@ class Board {
     const ctx = this.ctx;
 
     ctx.beginPath();
-    ctx.fillStyle = 'rgba(255, 40, 230, 1.0)';
-    ctx.strokeStyle = 'rgba(255, 40, 230, 1.0)';
+    ctx.fillStyle = "rgba(255, 40, 230, 1.0)";
+    ctx.strokeStyle = "rgba(255, 40, 230, 1.0)";
     ctx.moveTo(300, 25);
     ctx.lineTo(300, 150);
     ctx.moveTo(300, 450);
@@ -232,7 +232,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.75)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.75)";
     ctx.moveTo(300, 150);
     ctx.lineTo(300, 215);
     ctx.moveTo(300, 450);
@@ -245,7 +245,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.5)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.5)";
     ctx.moveTo(300, 215);
     ctx.lineTo(300, 250);
     ctx.moveTo(300, 350);
@@ -258,7 +258,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.3)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.3)";
     ctx.moveTo(300, 250);
     ctx.lineTo(300, 265);
     ctx.moveTo(300, 335);
@@ -271,7 +271,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.1)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.1)";
     ctx.moveTo(300, 265);
     ctx.lineTo(300, 295);
     ctx.moveTo(300, 305);
@@ -284,7 +284,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 1.0)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 1.0)";
     ctx.moveTo(100, 100);
     ctx.lineTo(195, 195);
     ctx.moveTo(100, 500);
@@ -297,7 +297,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.75)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.75)";
     ctx.moveTo(194, 194);
     ctx.lineTo(240, 240);
     ctx.moveTo(406, 194);
@@ -310,7 +310,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.5)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.5)";
     ctx.moveTo(240, 240);
     ctx.lineTo(265, 265);
     ctx.moveTo(335, 335);
@@ -323,7 +323,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.25)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.25)";
     ctx.moveTo(265, 265);
     ctx.lineTo(275, 275);
     ctx.moveTo(325, 325);
@@ -336,7 +336,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.1)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.1)";
     ctx.moveTo(275, 275);
     ctx.lineTo(295, 295);
     ctx.moveTo(275, 325);
@@ -373,9 +373,11 @@ class Board {
 /*!************************!*\
   !*** ./js/obstacle.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 class Obstacle {
   constructor(ctx, path, speed) {
     this.ctx = ctx;
@@ -384,16 +386,18 @@ class Obstacle {
     this.path = path;
     this.begin = 0;
     this.end = 0;
+    this.type = Math.floor(Math.random() * 100) >= 95 ? "heal" : "harm";
+    this.color = this.type === "heal" ? "0, 150, 255" : "255, 0, 0";
 
     this.sections = [
       0,
       Math.PI / 4,
       Math.PI / 2,
-      3 * Math.PI / 4,
+      (3 * Math.PI) / 4,
       Math.PI,
-      5 * Math.PI / 4,
-      3 * Math.PI / 2,
-      7 * Math.PI / 4
+      (5 * Math.PI) / 4,
+      (3 * Math.PI) / 2,
+      (7 * Math.PI) / 4
     ];
   }
 
@@ -406,22 +410,22 @@ class Obstacle {
     this.length = (this.radius / 10) * 3.5;
 
     ctx.beginPath();
-    ctx.strokeStyle = `rgba(255, 0, 0, ${ this.radius / 50 })`;
-    ctx.fillStyle = `rgba(255, 0, 0, ${ this.radius / 50 })`;
+    ctx.strokeStyle = `rgba(${this.color}, ${this.radius / 50})`;
+    ctx.fillStyle = `rgba(${this.color}, ${this.radius / 50})`;
     ctx.arc(
       300,
       300,
       this.radius,
-      5.5 + this.sections[path],
-      Math.PI * 2 + this.sections[path],
+      5.5 + sections[path],
+      Math.PI * 2 + sections[path],
       false
     );
     ctx.arc(
       300,
       300,
       this.radius - this.length,
-      Math.PI * 2 + this.sections[path],
-      5.5 + this.sections[path],
+      Math.PI * 2 + sections[path],
+      5.5 + sections[path],
       true
     );
     ctx.fill();
@@ -431,7 +435,7 @@ class Obstacle {
   }
 }
 
-module.exports = Obstacle;
+/* harmony default export */ __webpack_exports__["default"] = (Obstacle);
 
 
 /***/ }),
@@ -451,11 +455,11 @@ class Player {
   }
 
   moveLeft() {
-    this.pos = (this.pos + 1 > 7 ? 0 : this.pos + 1);
+    this.pos = this.pos + 1 > 7 ? 0 : this.pos + 1;
   }
 
   moveRight() {
-    this.pos = (this.pos - 1 < 0 ? 7 : this.pos - 1);
+    this.pos = this.pos - 1 < 0 ? 7 : this.pos - 1;
   }
 
   drawShip() {
@@ -668,18 +672,22 @@ class Player {
   shieldBar() {
     const ctx = this.ctx;
 
-    ctx.strokeStyle = '#FFFFFF';
+    ctx.strokeStyle = "#FFFFFF";
     ctx.strokeRect(5, 5, 104, 20);
     ctx.fillStyle = `rgb(0, 150, 255)`;
     ctx.fillRect(7, 7, this.shields * 4, 16);
-    ctx.font = '15px Arial';
+    ctx.font = "15px Arial";
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#000000';
-    ctx.fillText('SHIELDS', 25, 21);
+    ctx.fillStyle = "#000000";
+    ctx.fillText("SHIELDS", 25, 21);
   }
 
   damage() {
-    this.shields > 0 ? this.shields -= 1 : null;
+    this.shields > 0 ? (this.shields -= 1) : null;
+  }
+
+  heal() {
+    this.shields += this.shields < 25 ? 1 : 0;
   }
 
   render() {
@@ -705,7 +713,6 @@ module.exports = Player;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util */ "./js/util.js");
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_util__WEBPACK_IMPORTED_MODULE_0__);
 
 
 class Star {
@@ -713,7 +720,7 @@ class Star {
     this.ctx = ctx;
     this.speed = speed;
 
-    this.util = new _util__WEBPACK_IMPORTED_MODULE_0___default.a();
+    this.util = new _util__WEBPACK_IMPORTED_MODULE_0__["default"]();
 
     this.xDir = this.util.makePosOrNeg(Math.random());
     this.yDir = this.util.makePosOrNeg(Math.random());
@@ -723,21 +730,17 @@ class Star {
     this.curY = y;
   }
 
-
-
   drawStar() {
     const ctx = this.ctx;
-    const opacity = Math.hypot(
-      Math.abs(this.curX - 300),
-      Math.abs(this.curY - 300)
-    ) / 300;
+    const opacity =
+      Math.hypot(Math.abs(this.curX - 300), Math.abs(this.curY - 300)) / 300;
 
     ctx.beginPath();
     ctx.strokeStyle = `rgba(200, 200, 200, ${opacity})`;
     ctx.lineTo(this.curX, this.curY);
-    this.curX += (this.xDir / this.magnitude);
+    this.curX += this.xDir / this.magnitude;
     this.xDir *= this.speed;
-    this.curY += (this.yDir / this.magnitude);
+    this.curY += this.yDir / this.magnitude;
     this.yDir *= this.speed;
     ctx.lineTo(this.curX, this.curY);
     ctx.stroke();
@@ -757,20 +760,22 @@ class Star {
 /*!********************!*\
   !*** ./js/util.js ***!
   \********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 class Util {
   constructor() {
     this.patterns = [
-      [0,1,2,3,4,5,6,7],
-      [4,1,2,0,3,7,5,6],
-      [7,6,5,4,3,2,1,0],
-      [4,3,5,0,6,1,7,2],
-      [2,4,1,6,4,3,7,0],
-      [5,2,7,1,0,4,3,6],
-      [1,7,3,2,5,6,0,4],
-      [3,5,6,7,0,1,2,4]
+      [0, 1, 2, 3, 4, 5, 6, 7],
+      [4, 1, 2, 0, 3, 7, 5, 6],
+      [7, 6, 5, 4, 3, 2, 1, 0],
+      [4, 3, 5, 0, 6, 1, 7, 2],
+      [2, 4, 1, 6, 4, 3, 7, 0],
+      [5, 2, 7, 1, 0, 4, 3, 6],
+      [1, 7, 3, 2, 5, 6, 0, 4],
+      [3, 5, 6, 7, 0, 1, 2, 4]
     ];
   }
 
@@ -780,17 +785,15 @@ class Util {
 
   makePosOrNeg(num) {
     const random = this.randomNumber(10);
-    return random % 2 === 0 ? Math.abs(num) : -Math.abs(num);  
+    return random % 2 === 0 ? Math.abs(num) : -Math.abs(num);
   }
 
   randomNumber(max) {
-    let n;
-    n = Math.floor(Math.random() * (max));
-    return n;
+    return Math.floor(Math.random() * max);
   }
 }
 
-module.exports = Util;
+/* harmony default export */ __webpack_exports__["default"] = (Util);
 
 
 /***/ }),
@@ -808,9 +811,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./player */ "./js/player.js");
 /* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_player__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _obstacle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./obstacle */ "./js/obstacle.js");
-/* harmony import */ var _obstacle__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_obstacle__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./util */ "./js/util.js");
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_util__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -834,7 +835,7 @@ class Wormhole {
 
     this.board = new _board__WEBPACK_IMPORTED_MODULE_0__["default"](ctx, this.speed);
     this.player = new _player__WEBPACK_IMPORTED_MODULE_1___default.a(ctx);
-    this.util = new _util__WEBPACK_IMPORTED_MODULE_3___default.a();
+    this.util = new _util__WEBPACK_IMPORTED_MODULE_3__["default"]();
     this.obstacles = [];
     this.circles = [];
     this.score = 0;
@@ -847,7 +848,7 @@ class Wormhole {
     this.renderElements = this.renderElements.bind(this);
     this.renderGame = this.renderGame.bind(this);
 
-    this.audio = document.getElementById('game-audio');
+    this.audio = document.getElementById("game-audio");
     this.audio.load();
   }
 
@@ -856,7 +857,7 @@ class Wormhole {
     let { curPath, curPattern } = this;
 
     setInterval(() => {
-      const obstacle = new _obstacle__WEBPACK_IMPORTED_MODULE_2___default.a(ctx, curPattern[curPath], this.speed);
+      const obstacle = new _obstacle__WEBPACK_IMPORTED_MODULE_2__["default"](ctx, curPattern[curPath], this.speed);
       curPath = curPath + 1;
       if (curPath >= curPattern.length) {
         curPattern = util.randomPattern();
@@ -866,10 +867,10 @@ class Wormhole {
       obstacles.length > 20 ? obstacles.shift() : null;
     }, 200);
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft'){
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft") {
         player.moveLeft();
-      } else if (e.key === 'ArrowRight'){
+      } else if (e.key === "ArrowRight") {
         player.moveRight();
       }
     });
@@ -891,31 +892,31 @@ class Wormhole {
   renderScore() {
     const ctx = this.ctx;
 
-    ctx.strokeStyle = '#eeeeee';
-    ctx.font = '18px Arial';
+    ctx.strokeStyle = "#eeeeee";
+    ctx.font = "18px Arial";
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#999999';
+    ctx.fillStyle = "#999999";
     ctx.fillText(this.score, 550, 21);
   }
 
   renderElements() {
-    const { board, ctx, obstacles, paths, player, renderGame } = this;
-    const deathPaths = [];
+    const { board, obstacles, paths, player } = this;
+    const activePaths = [];
 
     board.render();
     obstacles.forEach(obst => {
       obst.render();
 
       if (obst.begin > 200 && obst.end < 280) {
-        paths[obst.path] = true;
-        deathPaths.push(obst.path);
-      } else if (!deathPaths.includes(obst.path)) {
+        paths[obst.path] = obst.type;
+        activePaths.push(obst.path);
+      } else if (!activePaths.includes(obst.path)) {
         paths[obst.path] = false;
       }
     });
 
     for (let i = 0; i < 8; i++) {
-      if (!deathPaths.includes(i)) {
+      if (!activePaths.includes(i)) {
         paths[i] = false;
       }
     }
@@ -936,19 +937,25 @@ class Wormhole {
 
     if (player.shields <= 0) {
       this.audio.pause();
-      const score = document.getElementById('player-score');
+      const score = document.getElementById("player-score");
       score.innerHTML = this.score;
-      const scoreboardContainer = document.getElementById('scoreboard-container');
-      const scoreboard = document.getElementById('scoreboard');
-      scoreboardContainer.className = 'scoreboard-container show';
-      scoreboard.className = 'scoreboard open';
+      const scoreboardContainer = document.getElementById(
+        "scoreboard-container"
+      );
+      const scoreboard = document.getElementById("scoreboard");
+      scoreboardContainer.className = "scoreboard-container show";
+      scoreboard.className = "scoreboard open";
     } else {
       if (paths[player.pos]) {
-        player.damage();
-        ctx.save();
-        ctx.rotate(2 * Math.PI / 360);
-        renderElements();
-        ctx.restore();
+        if (paths[player.pos] === "heal") {
+          player.heal();
+        } else {
+          player.damage();
+          ctx.save();
+          ctx.rotate((2 * Math.PI) / 360);
+          renderElements();
+          ctx.restore();
+        }
       }
       window.requestAnimationFrame(renderGame);
     }

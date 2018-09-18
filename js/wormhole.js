@@ -1,7 +1,7 @@
-import Board from './board';
-import Player from './player';
-import Obstacle from './obstacle';
-import Util from './util';
+import Board from "./board";
+import Player from "./player";
+import Obstacle from "./obstacle";
+import Util from "./util";
 
 class Wormhole {
   constructor(ctx) {
@@ -34,7 +34,7 @@ class Wormhole {
     this.renderElements = this.renderElements.bind(this);
     this.renderGame = this.renderGame.bind(this);
 
-    this.audio = document.getElementById('game-audio');
+    this.audio = document.getElementById("game-audio");
     this.audio.load();
   }
 
@@ -53,10 +53,10 @@ class Wormhole {
       obstacles.length > 20 ? obstacles.shift() : null;
     }, 200);
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft'){
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft") {
         player.moveLeft();
-      } else if (e.key === 'ArrowRight'){
+      } else if (e.key === "ArrowRight") {
         player.moveRight();
       }
     });
@@ -78,31 +78,31 @@ class Wormhole {
   renderScore() {
     const ctx = this.ctx;
 
-    ctx.strokeStyle = '#eeeeee';
-    ctx.font = '18px Arial';
+    ctx.strokeStyle = "#eeeeee";
+    ctx.font = "18px Arial";
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#999999';
+    ctx.fillStyle = "#999999";
     ctx.fillText(this.score, 550, 21);
   }
 
   renderElements() {
-    const { board, ctx, obstacles, paths, player, renderGame } = this;
-    const deathPaths = [];
+    const { board, obstacles, paths, player } = this;
+    const activePaths = [];
 
     board.render();
     obstacles.forEach(obst => {
       obst.render();
 
       if (obst.begin > 200 && obst.end < 280) {
-        paths[obst.path] = true;
-        deathPaths.push(obst.path);
-      } else if (!deathPaths.includes(obst.path)) {
+        paths[obst.path] = obst.type;
+        activePaths.push(obst.path);
+      } else if (!activePaths.includes(obst.path)) {
         paths[obst.path] = false;
       }
     });
 
     for (let i = 0; i < 8; i++) {
-      if (!deathPaths.includes(i)) {
+      if (!activePaths.includes(i)) {
         paths[i] = false;
       }
     }
@@ -123,19 +123,25 @@ class Wormhole {
 
     if (player.shields <= 0) {
       this.audio.pause();
-      const score = document.getElementById('player-score');
+      const score = document.getElementById("player-score");
       score.innerHTML = this.score;
-      const scoreboardContainer = document.getElementById('scoreboard-container');
-      const scoreboard = document.getElementById('scoreboard');
-      scoreboardContainer.className = 'scoreboard-container show';
-      scoreboard.className = 'scoreboard open';
+      const scoreboardContainer = document.getElementById(
+        "scoreboard-container"
+      );
+      const scoreboard = document.getElementById("scoreboard");
+      scoreboardContainer.className = "scoreboard-container show";
+      scoreboard.className = "scoreboard open";
     } else {
       if (paths[player.pos]) {
-        player.damage();
-        ctx.save();
-        ctx.rotate(2 * Math.PI / 360);
-        renderElements();
-        ctx.restore();
+        if (paths[player.pos] === "heal") {
+          player.heal();
+        } else {
+          player.damage();
+          ctx.save();
+          ctx.rotate((2 * Math.PI) / 360);
+          renderElements();
+          ctx.restore();
+        }
       }
       window.requestAnimationFrame(renderGame);
     }

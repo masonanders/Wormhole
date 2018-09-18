@@ -1,4 +1,4 @@
-import Star from './stars';
+import Star from "./stars";
 
 class Board {
   constructor(ctx, speed) {
@@ -10,7 +10,7 @@ class Board {
   background() {
     const ctx = this.ctx;
 
-    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.fillStyle = "rgb(0, 0, 0)";
     ctx.fillRect(0, 0, 600, 600);
   }
 
@@ -20,18 +20,18 @@ class Board {
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.arc(300, 300, 290, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(255, 40, 230, 1)';
+    ctx.fillStyle = "rgba(255, 40, 230, 1)";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
     ctx.arc(300, 300, 275, 0, Math.PI * 2, false);
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = "#000000";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.05)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.05)";
     ctx.arc(300, 300, 5, 0, Math.PI * 2, false);
     ctx.stroke();
     ctx.closePath();
@@ -42,19 +42,19 @@ class Board {
 
     ctx.beginPath();
     ctx.arc(300, 300, 35, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(255, 40, 230, 0.05)';
+    ctx.fillStyle = "rgba(255, 40, 230, 0.05)";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
     ctx.arc(300, 300, 25, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(255, 40, 230, 0.05)';
+    ctx.fillStyle = "rgba(255, 40, 230, 0.05)";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
     ctx.arc(300, 300, 15, 0, Math.PI * 2, false);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+    ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
     ctx.fill();
     ctx.closePath();
   }
@@ -63,8 +63,8 @@ class Board {
     const ctx = this.ctx;
 
     ctx.beginPath();
-    ctx.fillStyle = 'rgba(255, 40, 230, 1.0)';
-    ctx.strokeStyle = 'rgba(255, 40, 230, 1.0)';
+    ctx.fillStyle = "rgba(255, 40, 230, 1.0)";
+    ctx.strokeStyle = "rgba(255, 40, 230, 1.0)";
     ctx.moveTo(300, 25);
     ctx.lineTo(300, 150);
     ctx.moveTo(300, 450);
@@ -77,7 +77,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.75)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.75)";
     ctx.moveTo(300, 150);
     ctx.lineTo(300, 215);
     ctx.moveTo(300, 450);
@@ -90,7 +90,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.5)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.5)";
     ctx.moveTo(300, 215);
     ctx.lineTo(300, 250);
     ctx.moveTo(300, 350);
@@ -103,7 +103,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.3)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.3)";
     ctx.moveTo(300, 250);
     ctx.lineTo(300, 265);
     ctx.moveTo(300, 335);
@@ -116,7 +116,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.1)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.1)";
     ctx.moveTo(300, 265);
     ctx.lineTo(300, 295);
     ctx.moveTo(300, 305);
@@ -129,7 +129,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 1.0)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 1.0)";
     ctx.moveTo(100, 100);
     ctx.lineTo(195, 195);
     ctx.moveTo(100, 500);
@@ -142,7 +142,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.75)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.75)";
     ctx.moveTo(194, 194);
     ctx.lineTo(240, 240);
     ctx.moveTo(406, 194);
@@ -155,7 +155,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.5)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.5)";
     ctx.moveTo(240, 240);
     ctx.lineTo(265, 265);
     ctx.moveTo(335, 335);
@@ -168,7 +168,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.25)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.25)";
     ctx.moveTo(265, 265);
     ctx.lineTo(275, 275);
     ctx.moveTo(325, 325);
@@ -181,7 +181,7 @@ class Board {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 40, 230, 0.1)';
+    ctx.strokeStyle = "rgba(255, 40, 230, 0.1)";
     ctx.moveTo(275, 275);
     ctx.lineTo(295, 295);
     ctx.moveTo(275, 325);

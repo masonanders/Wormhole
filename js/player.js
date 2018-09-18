@@ -6,11 +6,11 @@ class Player {
   }
 
   moveLeft() {
-    this.pos = (this.pos + 1 > 7 ? 0 : this.pos + 1);
+    this.pos = this.pos + 1 > 7 ? 0 : this.pos + 1;
   }
 
   moveRight() {
-    this.pos = (this.pos - 1 < 0 ? 7 : this.pos - 1);
+    this.pos = this.pos - 1 < 0 ? 7 : this.pos - 1;
   }
 
   drawShip() {
@@ -223,18 +223,22 @@ class Player {
   shieldBar() {
     const ctx = this.ctx;
 
-    ctx.strokeStyle = '#FFFFFF';
+    ctx.strokeStyle = "#FFFFFF";
     ctx.strokeRect(5, 5, 104, 20);
     ctx.fillStyle = `rgb(0, 150, 255)`;
     ctx.fillRect(7, 7, this.shields * 4, 16);
-    ctx.font = '15px Arial';
+    ctx.font = "15px Arial";
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#000000';
-    ctx.fillText('SHIELDS', 25, 21);
+    ctx.fillStyle = "#000000";
+    ctx.fillText("SHIELDS", 25, 21);
   }
 
   damage() {
-    this.shields > 0 ? this.shields -= 1 : null;
+    this.shields > 0 ? (this.shields -= 1) : null;
+  }
+
+  heal() {
+    this.shields += this.shields < 25 ? 1 : 0;
   }
 
   render() {
