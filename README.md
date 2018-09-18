@@ -49,7 +49,7 @@ Because of this good practice, on the case that I decided I needed to refactor m
 
 ## Future Features may include
 
-* Rare generation of a shield regenerating obstacle.
+* ~~Rare generation of a shield regenerating obstacles~~.
 * Gradually increasing obstacle spawn rates.
 * Obstacles can spawn more than one at a time.
 * Temporary turret upgrade to destroy obstacles.
