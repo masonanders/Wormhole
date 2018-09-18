@@ -854,6 +854,8 @@ class Wormhole {
 
   play() {
     const { ctx, obstacles, player, util } = this;
+    const left = document.getElementById("left");
+    const right = document.getElementById("right");
     let { curPath, curPattern } = this;
 
     setInterval(() => {
@@ -866,6 +868,14 @@ class Wormhole {
       obstacles.push(obstacle);
       obstacles.length > 20 ? obstacles.shift() : null;
     }, 200);
+
+    left.addEventListener("touchstart", () => {
+      player.moveLeft();
+    });
+
+    right.addEventListener("touchstart", () => {
+      player.moveRight();
+    });
 
     document.addEventListener("keydown", e => {
       if (e.key === "ArrowLeft") {
