@@ -34,6 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
     gameAudio.muted = muteButton.className === "mute on" ? true : false;
   });
 
+  window.addEventListener("touchstart", e => e.preventDefault());
+  window.addEventListener("touchmove", e => e.preventDefault());
+  window.addEventListener("touchend", e => e.preventDefault());
+
   const playGame = () => {
     game = new Wormhole(ctx);
 
