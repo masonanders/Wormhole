@@ -8,6 +8,11 @@
   .mobile-controls-div {
     visibility: hidden;
   }
+
+  .mobile-controls {
+    position: none;
+    top: 0;
+  }
 }
 
 .mobile-controls {
