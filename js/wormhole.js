@@ -60,7 +60,8 @@ class Wormhole {
       player.moveLeft();
     });
 
-    left.addEventListener("touchend", () => {
+    left.addEventListener("touchend", e => {
+      e.preventDefault();
       left.style.backgroundColor = "rgba(0, 0, 0, 0)";
     });
 
@@ -69,7 +70,8 @@ class Wormhole {
       player.moveRight();
     });
 
-    right.addEventListener("touchend", () => {
+    right.addEventListener("touchend", e => {
+      e.preventDefault();
       right.style.backgroundColor = "rgba(0, 0, 0, 0)";
     });
 
