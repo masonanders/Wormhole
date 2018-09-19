@@ -870,11 +870,21 @@ class Wormhole {
     }, 200);
 
     left.addEventListener("touchstart", () => {
+      left.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
       player.moveLeft();
     });
 
+    left.addEventListener("touchend", () => {
+      left.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    });
+
     right.addEventListener("touchstart", () => {
+      right.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
       player.moveRight();
+    });
+
+    right.addEventListener("touchend", () => {
+      right.style.backgroundColor = "rgba(0, 0, 0, 0)";
     });
 
     document.addEventListener("keydown", e => {
