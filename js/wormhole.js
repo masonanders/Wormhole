@@ -58,6 +58,7 @@ class Wormhole {
     left.addEventListener("touchstart", () => {
       left.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
       player.moveLeft();
+      left.click();
     });
 
     left.addEventListener("touchend", e => {
@@ -68,6 +69,7 @@ class Wormhole {
     right.addEventListener("touchstart", () => {
       right.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
       player.moveRight();
+      left.click();
     });
 
     right.addEventListener("touchend", e => {
