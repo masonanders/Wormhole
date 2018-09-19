@@ -23,13 +23,13 @@
 .scoreboard h2 {
   font-size: 0;
   color: red;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   text-shadow: 2px 2px black;
 }
 
 .scoreboard h4 {
   font-size: 0;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   margin-top: 0;
 }
 
@@ -37,7 +37,7 @@
   background-color: rgba(0, 0, 0, 0);
   border: 0;
   cursor: pointer;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 0;
   padding: 10px 15px;
 }
@@ -74,4 +74,26 @@
 
 .show {
   z-index: 2;
+}
+
+@media only screen and (max-width: 1024px) {
+  .open {
+    height: 40%;
+    width: 60%;
+  }
+
+  .open h2 {
+    font-size: 45px;
+    margin-bottom: 45px;
+  }
+
+  .open h4 {
+    font-size: 25px;
+    margin-bottom: 25px;
+  }
+
+  .open button {
+    font-size: 25px;
+    margin-top: 30px;
+  }
 }

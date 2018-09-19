@@ -52,6 +52,18 @@ h1 {
   justify-content: center;
 }
 
+@media only screen and (max-width: 1024px) {
+  .canvas-div {
+    width: 100%;
+    height: auto;
+  }
+
+  #wormhole {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .linkedin-link {
   background-image: url("../docs/images/linked-in.png"); /* image provided by Linked-In is under copywrite law */
   background-size: cover;
@@ -67,14 +79,4 @@ h1 {
   margin-right: 10px;
   width: 25px;
   z-index: 2;
-}
-
-@media only screen and (min-width: 1025px) {
-  .mobile-controls-div {
-    visibility: hidden;
-  }
-
-  #instructions:after {
-    content: "Press left and right on your keyboard to navigate";
-  }
 }

@@ -39,6 +39,12 @@
   content: "Press left and right on your screen to navigate";
 }
 
+@media only screen and (min-width: 1025px) {
+  #instructions:after {
+    content: "Press left and right on your keyboard to navigate";
+  }
+}
+
 .start-menu button {
   background-color: rgba(0, 0, 0, 0);
   border: 0;
@@ -53,4 +59,28 @@
 .start-menu button:hover {
   color: white;
   text-shadow: 2px 2px black;
+}
+
+@media only screen and (max-width: 1024px) {
+  .start-menu {
+    height: 40%;
+    width: 60%;
+  }
+
+  .start-menu h2 {
+    font-size: 40px;
+  }
+
+  .start-menu h3 {
+    font-size: 20px;
+    margin: 30px 0 0 0;
+  }
+
+  .start-menu p {
+    font-size: 17px;
+  }
+
+  .start-menu button {
+    font-size: 20px;
+  }
 }
