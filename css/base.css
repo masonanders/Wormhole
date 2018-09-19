@@ -8,7 +8,7 @@ body {
 
 h1 {
   color: #21ecff;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 40px;
   margin: 0;
   text-align: center;
@@ -33,7 +33,7 @@ h1 {
 
 .mute {
   background-color: rgba(0, 0, 0, 0);
-  background-image: url('../docs/images/volume.png'); /* image by Xinh Studio at https://www.iconfinder.com/xinhstudio; for personal use only */
+  background-image: url("../docs/images/volume.png"); /* image by Xinh Studio at https://www.iconfinder.com/xinhstudio; for personal use only */
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -44,7 +44,7 @@ h1 {
 }
 
 .on {
-  background-image: url('../docs/images/mute.png'); /* image by Xinh Studio at https://www.iconfinder.com/xinhstudio; for personal use only */
+  background-image: url("../docs/images/mute.png"); /* image by Xinh Studio at https://www.iconfinder.com/xinhstudio; for personal use only */
 }
 
 .canvas-div {
@@ -53,7 +53,7 @@ h1 {
 }
 
 .linkedin-link {
-  background-image: url('../docs/images/linked-in.png'); /* image provided by Linked-In is under copywrite law */
+  background-image: url("../docs/images/linked-in.png"); /* image provided by Linked-In is under copywrite law */
   background-size: cover;
   height: 25px;
   width: 25px;
@@ -61,10 +61,20 @@ h1 {
 }
 
 .github-link {
-  background-image: url('../docs/images/github.png'); /* image provided by Github is under copywrite law */
+  background-image: url("../docs/images/github.png"); /* image provided by Github is under copywrite law */
   background-size: cover;
   height: 25px;
   margin-right: 10px;
   width: 25px;
   z-index: 2;
+}
+
+@media only screen and (min-width: 1025px) {
+  .mobile-controls-div {
+    visibility: hidden;
+  }
+
+  #instructions:after {
+    content: "Press left and right on your keyboard to navigate";
+  }
 }

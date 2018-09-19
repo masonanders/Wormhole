@@ -5,12 +5,6 @@
   top: 600px;
 }
 
-@media only screen and (min-width: 1025px) {
-  .mobile-controls-div {
-    visibility: hidden;
-  }
-}
-
 .mobile-controls {
   width: 80%;
   height: 150px;

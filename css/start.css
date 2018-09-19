@@ -35,6 +35,10 @@
   text-align: center;
 }
 
+#instructions:after {
+  content: "Press left and right on your screen to navigate";
+}
+
 .start-menu button {
   background-color: rgba(0, 0, 0, 0);
   border: 0;
