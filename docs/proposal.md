@@ -75,7 +75,7 @@ Upon 'Game Over' a scoreboard modal will slide down listing the player's previou
 - [x] Complete MVPs and iron out project.
 
 ##### Day 5:
-- [ ] Implement bonus features.
+- [x] Implement bonus features.
 
 ### Bonus features
 * Items that may help or hinder the player:
