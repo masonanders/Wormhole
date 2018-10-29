@@ -35,6 +35,10 @@ Rather than keep track of the ship's and each object's occupied coordinates and 
 
 This checks each obstacle and if it is in a "danger zone" it's section's "danger" state is set to `true` and the id is pushed to a local array. Otherwise if the obstacle is not in a "danger zone" and it's section is *not* included in the current array of `deathPaths` it changes it's section's "danger state" to `false`. Lastly any section that has no obstacle currently in it has it's "danger" state reset to `false`.
 
+#### Mobile Compatibility
+
+The game was first designed to be played on a keyboard with left and right keys. But I wanted mobile users to be able to enjoy the game as well so I used a simple data query to detect whether the display screen was below a certain size. If it is mobile-sized, left and right touch-buttons will be generated towards the bottom of the screen that provide mobile users the same functionality as the left/right keys on a keyboard.
+
 #### Efficient Visual Designs
 
 Entities that are numerous in number are kept only while needed in order to preserve memory. Each instance of an Obstacle and/or Star (white specks in the background) are stored in an array that is iterated through to render the object. That array has a limit to it's length and once that limit is reached the array is shifted to remove an old object each time a new object is push on to it.
